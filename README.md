@@ -2,6 +2,8 @@
 
 **Every part of DeepSeek Harness, explained in plain English.**
 
+### ▶ Live at **https://dsh-plugin-catalogue.web.app**
+
 DeepSeek Harness is built out of **287 small parts** — one searches the web, one reads your files,
 one keeps a long goal on track, one draws the sidebar. The app ships a reference for each of them,
 but it is written for the engineers who build the harness. It will tell you that something is a
@@ -57,6 +59,9 @@ toggle on the same page.
 | **Build your own** | The harness's own plugin-development guides, verbatim, marked for developers |
 
 ## Run it
+
+The catalogue is already published at **https://dsh-plugin-catalogue.web.app** — you only need to
+run it locally to change it. To do that:
 
 ```bash
 git clone https://github.com/khan2abdul/dsh-plugin-catalogue.git
@@ -138,16 +143,31 @@ tools/
 
 ```bash
 node tools/smoke.mjs                                 # dataset + markdown pipeline, no browser needed
-node tools/serve-dist.mjs                            # serve dist/ on :4173
-node tools/verify-dist.mjs http://127.0.0.1:4173     # HTTP checks against the built site
 node tools/check-plain.cjs                           # plain-language coverage + jargon audit
+node tools/serve-dist.mjs                            # serve dist/ on :4173
+node tools/verify-dist.mjs http://127.0.0.1:4173     # HTTP checks against a built site
+node tools/verify-dev.mjs http://localhost:5273      # checks against a running dev server
+node tools/verify-hosted.mjs https://dsh-plugin-catalogue.web.app   # checks the live deployment
 ```
 
 `smoke.mjs` asserts the dataset invariants (287 packages, 183 settings lines, 4 presets expanding to
 29/30/6/30), that all 285 documents render through the deployed markdown pipeline, that install states
 account for every package exactly once, and that no engineer jargon reaches reader-facing text.
 `verify-dist.mjs` asserts a built site serves its shell, stylesheet, main bundle and lazily-loaded
-documentation.
+documentation. `verify-hosted.mjs` goes further and checks the deployed host itself: immutable caching
+on hashed assets, no caching on the shell (so a redeploy can never leave a visitor on a stale page that
+points at deleted files), compression, content types, and path fallback.
+
+## Deploying
+
+Hosted on **Firebase Hosting** in the dedicated project `dsh-plugin-catalogue`.
+
+```bash
+npm run deploy        # builds, then deploys dist/ to Firebase Hosting
+```
+
+`firebase.json` publishes `dist/`, caches hashed assets immutably, and keeps the shell uncached. The
+site uses hash-based routing, so it needs no server-side rewrite rules and will work on any static host.
 
 ## Limitations, stated plainly
 

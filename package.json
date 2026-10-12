@@ -8,8 +8,10 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
+    "deploy": "npm run build && firebase deploy --only hosting",
     "typecheck": "tsc --noEmit",
-    "build:data": "node tools/build-data.js"
+    "build:data": "node tools/build-data.cjs",
+    "check": "node tools/smoke.mjs && node tools/check-plain.cjs"
   },
   "dependencies": {
     "marked": "^18.1.0",
