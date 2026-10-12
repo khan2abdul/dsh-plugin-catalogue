@@ -1,0 +1,730 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Plain-language layer
+   Components added for the reader-facing rewrite. Same rule as site.css: every
+   value is a real DeepSeek Harness design token.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── start-here panel ──────────────────────────────────────────────────────── */
+
+.panel--lead {
+  background: var(--dsw-alias-bg-layer-2);
+  border-color: var(--dsw-alias-border-l2);
+}
+
+.startlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.startlist li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--dsw-alias-label-secondary);
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.startlist li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--dsw-alias-state-business-primary);
+}
+
+.startlist strong {
+  color: var(--dsw-alias-label-primary);
+  font-weight: 600;
+}
+
+.startlist em {
+  font-style: normal;
+  color: var(--dsw-alias-state-business-primary);
+  font-weight: 500;
+}
+
+/* ── reader table ──────────────────────────────────────────────────────────── */
+
+.table--reader .cell-what {
+  min-width: 320px;
+  max-width: 560px;
+}
+
+.what__head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
+  margin-bottom: 3px;
+}
+
+.what__icon {
+  color: var(--dsw-alias-state-business-primary);
+  flex: 0 0 auto;
+}
+
+.what__name {
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.what__line {
+  color: var(--dsw-alias-label-secondary);
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.cell-audience,
+.cell-effort {
+  white-space: nowrap;
+}
+
+.cell-audience .badge {
+  margin-right: 4px;
+}
+
+.effort {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.effort--already-on {
+  background: var(--dsw-alias-state-success-tertiary);
+  color: var(--dsw-alias-state-success-primary);
+}
+
+.effort--one-setting {
+  background: var(--dsw-alias-state-business-tertiary);
+  color: var(--dsw-alias-state-business-primary);
+}
+
+.effort--needs-a-plugin {
+  background: var(--dsw-alias-state-warn-tertiary);
+  color: var(--dsw-alias-state-warn-label);
+}
+
+.effort--developer-task {
+  background: var(--dsw-alias-interactive-bg-hover);
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.page__footnote {
+  margin: 14px 0 0;
+  font-size: 11.5px;
+  color: var(--dsw-alias-label-caption);
+}
+
+/* ── detail header ─────────────────────────────────────────────────────────── */
+
+.detail-head__tech {
+  margin-top: 10px;
+  font-size: 11.5px;
+  color: var(--dsw-alias-label-caption);
+}
+
+.detail-head__tech code {
+  background: var(--dsw-alias-markdown-inline-code);
+  border-radius: var(--dsw-radius-xs);
+  padding: 1px 5px;
+}
+
+.detail-head__eyebrow .what__icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── why / pros / cons / when ──────────────────────────────────────────────── */
+
+.panel--why {
+  background: var(--dsw-alias-state-business-tertiary);
+  border-color: transparent;
+}
+
+.panel--why .panel__title {
+  color: var(--dsw-alias-state-business-primary);
+}
+
+.why__text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--dsw-alias-label-primary);
+}
+
+.proscons,
+.whenwhen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.panel--pros {
+  border-left: 3px solid var(--dsw-alias-state-success-primary);
+}
+
+.panel--cons {
+  border-left: 3px solid var(--dsw-alias-state-warn-primary);
+}
+
+.pc-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  margin-right: 2px;
+}
+
+.pc-dot--pro {
+  background: var(--dsw-alias-state-success-primary);
+}
+
+.pc-dot--con {
+  background: var(--dsw-alias-state-warn-primary);
+}
+
+.pclist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pclist li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.pclist li::before {
+  content: '';
+  position: absolute;
+  left: 3px;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.panel--pros .pclist li::before {
+  background: var(--dsw-alias-state-success-primary);
+  opacity: 1;
+}
+
+.panel--cons .pclist li::before {
+  background: var(--dsw-alias-state-warn-primary);
+  opacity: 1;
+}
+
+.whenlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.whenlist li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.whenlist li::before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.whenlist--yes li::before {
+  content: '✓';
+  color: var(--dsw-alias-state-success-primary);
+}
+
+.whenlist--no li::before {
+  content: '–';
+  color: var(--dsw-alias-label-caption);
+}
+
+.panel--effort {
+  background: var(--dsw-alias-bg-layer-2);
+}
+
+.effort__line {
+  margin: 0 0 6px;
+  font-size: 13.5px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.effort__audience {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--dsw-alias-label-tertiary);
+}
+
+/* ── technical details disclosure ──────────────────────────────────────────── */
+
+.technical {
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: var(--dsw-radius-lg);
+  background: var(--dsw-alias-bg-layer-1);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.technical > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 15px 20px;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+}
+
+.technical > summary::-webkit-details-marker {
+  display: none;
+}
+
+.technical > summary::before {
+  content: '▸';
+  color: var(--dsw-alias-label-caption);
+  font-weight: 400;
+}
+
+.technical[open] > summary::before {
+  content: '▾';
+}
+
+.technical[open] > summary {
+  border-bottom: 1px solid var(--dsw-alias-border-l1);
+}
+
+.technical__hint {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--dsw-alias-label-caption);
+}
+
+.technical__body {
+  padding: 16px 16px 2px;
+}
+
+.reference--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/* ── glossary ──────────────────────────────────────────────────────────────── */
+
+.terms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+}
+
+.term {
+  padding: 13px 15px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: var(--dsw-radius-md);
+  background: var(--dsw-alias-bg-layer-2);
+}
+
+.term__term {
+  font-size: 14px;
+  font-weight: 650;
+  color: var(--dsw-alias-label-primary);
+}
+
+.term__short {
+  font-size: 12.5px;
+  color: var(--dsw-alias-state-business-primary);
+  margin: 2px 0 7px;
+}
+
+.term__plain {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.term__detail {
+  margin: 8px 0 0;
+  padding-top: 7px;
+  border-top: 1px dashed var(--dsw-alias-border-l2);
+  font-size: 11.5px;
+  color: var(--dsw-alias-label-caption);
+}
+
+/* ── aside additions ───────────────────────────────────────────────────────── */
+
+.aside-card__note {
+  margin: 9px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--dsw-alias-label-caption);
+}
+
+/* ── responsive ────────────────────────────────────────────────────────────── */
+
+@media (max-width: 900px) {
+  .table--reader .cell-what {
+    min-width: 0;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Layout corrections
+   Badges and chips were being pushed out of view rather than wrapping. These
+   rules load after site.css and make every label container wrap, and make the
+   table and sidebar reachable instead of clipped.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Identity row: icon + category only, and it must wrap on a narrow window. */
+.detail-head__eyebrow {
+  flex-wrap: wrap;
+}
+
+/* Status / effort / audience labels get their own wrapping row. */
+.detail-head__badges {
+  margin-top: 2px;
+}
+
+.detail-head__badges .badge {
+  margin: 0 6px 6px 0;
+}
+
+/* The reader list must never hide a column: let cells wrap, and allow a
+   horizontal scroll as a last resort instead of clipping. */
+.table-wrap {
+  overflow-x: auto;
+}
+
+.table--reader .cell-what {
+  min-width: 220px;
+  max-width: 420px;
+}
+
+.table--reader .cell-audience,
+.table--reader .cell-effort {
+  white-space: normal;
+}
+
+.table--reader .cell-audience .badge,
+.table--reader .cell-effort .effort {
+  margin: 0 4px 4px 0;
+}
+
+.table--reader th,
+.table--reader td {
+  padding: 8px 10px;
+}
+
+/* Same clipping problem in the "Under the hood" table: its name column holds a
+   long explanation, so it must wrap rather than force the later columns out. */
+.table--rows .cell-name {
+  white-space: normal;
+  min-width: 240px;
+}
+
+.table--rows .cell-name .what__line {
+  margin-top: 2px;
+}
+
+/* A preset tool row is a 3-track grid; the settings block takes a full line
+   beneath it, so its text is never squeezed into a narrow column. */
+.preset-row {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
+
+.preset-row .code--inline {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+}
+
+.code--inline {
+  margin-top: 0;
+}
+
+/* ── sidebar layout ──────────────────────────────────────────────────────────
+   Previous attempt let every section size to its content and pinned the footer
+   with `margin-top: auto`, which emptied all the leftover space into one visible
+   gap above the footer. Instead: the filter sections size to their content, the
+   Matches section absorbs the remaining height, and the footer simply follows. */
+
+.sidebar {
+  overflow-y: auto; /* fallback only when the window is too short for the min heights */
+}
+
+.sidebar__section--cat {
+  flex: 0 0 auto;
+}
+
+.sidebar__section--results {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 140px;
+  min-height: 140px;
+}
+
+.sidebar__results {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+}
+
+.sidebar__foot {
+  margin-top: 0;
+}
+
+/* Filter chips on a fixed two-column grid, so they line up instead of wrapping
+   raggedly and leaving different gaps in each row. */
+.chipgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.chip--block {
+  width: 100%;
+  justify-content: flex-start;
+  min-width: 0;
+  padding: 5px 10px;
+  border-radius: var(--dsw-radius-sm);
+}
+
+.chip__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Category dropdown: same left/right edges as the chips and the search box. */
+.select {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: var(--dsw-radius-sm);
+  background: var(--dsw-specific-input-major);
+  color: var(--dsw-alias-label-primary);
+  font-family: inherit;
+  font-size: 12.5px;
+  outline: none;
+}
+
+.select:focus {
+  border-color: var(--dsw-alias-state-business-primary);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Homepage inventory
+   The reader's first question is "what do I have, and what is it called?", so
+   the homepage lists every part by its real name, grouped by install state.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.jumpbar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 10px;
+  margin: 2px 0 22px;
+}
+
+.jump {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 11px 13px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: var(--dsw-radius-md);
+  background: var(--dsw-alias-bg-layer-2);
+  color: inherit;
+}
+
+.jump:hover {
+  text-decoration: none;
+  border-color: var(--dsw-alias-border-l3);
+}
+
+.jump__count {
+  font-size: 22px;
+  font-weight: 650;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+}
+
+.jump__label {
+  font-size: 12px;
+  color: var(--dsw-alias-label-secondary);
+}
+
+.jump--working .jump__count {
+  color: var(--dsw-alias-state-success-primary);
+}
+
+.jump--off .jump__count {
+  color: var(--dsw-alias-state-warn-primary);
+}
+
+.jump--absent .jump__count {
+  color: var(--dsw-alias-label-tertiary);
+}
+
+.jump--internal .jump__count {
+  color: var(--dsw-alias-label-caption);
+}
+
+.stateblock {
+  padding-top: 18px;
+  margin-top: 18px;
+  border-top: 1px solid var(--dsw-alias-border-l1);
+  scroll-margin-top: 12px;
+}
+
+.stateblock:first-of-type {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.stateblock__head {
+  margin-bottom: 12px;
+}
+
+.stateblock__title {
+  margin: 0 0 4px;
+  font-size: 15px;
+  font-weight: 620;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+}
+
+.stateblock__blurb {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--dsw-alias-label-secondary);
+  max-width: 92ch;
+}
+
+.inventory {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: 8px;
+}
+
+.inv {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  padding: 9px 11px;
+  border: 1px solid var(--dsw-alias-border-l1);
+  border-radius: var(--dsw-radius-sm);
+  background: var(--dsw-alias-bg-layer-2);
+  color: inherit;
+}
+
+.inv:hover {
+  text-decoration: none;
+  border-color: var(--dsw-alias-state-business-primary);
+}
+
+.inv__top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.inv__name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.inv__headline {
+  font-size: 12.5px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.inv__line {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--dsw-alias-label-caption);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* The name of the plugin, directly under its headline. */
+.detail-head__pkg {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 11px;
+  font-size: 12.5px;
+}
+
+.detail-head__pkg code {
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: var(--dsw-radius-xs);
+  background: var(--dsw-alias-markdown-inline-code);
+  color: var(--dsw-alias-label-primary);
+}
+
+.detail-head__pkg-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--dsw-alias-label-caption);
+}
+
+/* Name plus plain headline inside the list table. */
+.what__pkg {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+}
+
+.what__headline {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dsw-alias-label-primary);
+  margin: 1px 0 2px;
+}

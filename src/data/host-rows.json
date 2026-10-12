@@ -1,0 +1,2853 @@
+[
+ {
+  "id": "tool-plugin-manager",
+  "name": "@deepseek-ai/dsh-plugin-manager/tools",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "── the agent plane moves behind agent presets ─────────────────────────────\n\nEvery row below composes what ONE agent contributes to the host registries:\nits tools, its prompt sections, its delegation backends. The base keeps them\nfor the TUI, which is single-session and composes its agent process-wide; the\nWeb surface disables them here and lets each session mount a preset instead.\n\nDisabling rather than deleting is deliberate: the base is shared, and a row\nabsent from a surface overlay would silently reappear the day someone reorders\nthe composition.\n`shell-env` STAYS in the host plane: `apps/cli/src/web.ts` injects it to\npublish `DSH_WEB_URL`/`DSH_WEB_MODE`, and a host row that injects a service is\nthe criterion for host-plane ownership — injection resolves before any session\nexists, so there is no agent to key by. Behind a preset realm those variables\nwould never reach the model's shell at all."
+  ]
+ },
+ {
+  "id": "plugin-manager",
+  "name": "@deepseek-ai/dsh-plugin-manager",
+  "state": "conditional (!!js)",
+  "disabledExpr": "!ctx.get('profileContext')",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "timer",
+  "name": "@deepseek-ai/cordis-plugin-timer",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "hmr",
+  "name": "@deepseek-ai/dsh-hmr",
+  "state": "conditional (!!js)",
+  "disabledExpr": "!ctx.get('profileContext')",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "root": []
+  },
+  "rationale": [
+   "Profile configuration reloads by default; module roots are opt-in."
+  ]
+ },
+ {
+  "id": "llm",
+  "name": "@deepseek-ai/dsh-llm",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "deepseek-llm-api-extensions",
+  "name": "@deepseek-ai/dsh-deepseek-llm-api-extensions",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "session",
+  "name": "@deepseek-ai/dsh-session",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "session-log-deepseek",
+  "name": "@deepseek-ai/dsh-session-log-deepseek",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "typert",
+  "name": "@deepseek-ai/dsh-typert-registry",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "typert-loader",
+  "name": "@deepseek-ai/dsh-typert-loader",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "typert-gateway",
+  "name": "@deepseek-ai/dsh-api-gateway",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "session-title",
+  "name": "@deepseek-ai/dsh-session-title",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "fallbackMaxWords": 5,
+   "fallbackMaxBytes": 40,
+   "maxTitleBytes": 80
+  },
+  "rationale": []
+ },
+ {
+  "id": "session-title-llm",
+  "name": "@deepseek-ai/dsh-session-title-first-prompt-llm",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "targetWords": 5,
+   "targetCjkCharacters": 10,
+   "maxInputBytes": 4096,
+   "maxOutputTokens": 64,
+   "timeoutMs": 60000
+  },
+  "rationale": []
+ },
+ {
+  "id": "user-questions",
+  "name": "@deepseek-ai/dsh-user-questions",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "agent",
+  "name": "@deepseek-ai/dsh-agent",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "plugin-package-inventory-deepseek",
+  "name": "@deepseek-ai/dsh-plugin-package-inventory-deepseek",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "agent-default-model",
+  "name": "@deepseek-ai/dsh-agent-default-model",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "provider": "deepseek-official",
+   "model": "deepseek-flash"
+  },
+  "rationale": [
+   "The transport-independent default for Agents created by entry points.\nSettings may supply a saved selection; consumers read it at creation time."
+  ]
+ },
+ {
+  "id": "jobs",
+  "name": "@deepseek-ai/dsh-jobs-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "llm-retry",
+  "name": "@deepseek-ai/dsh-llm-retry",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "config-editor",
+  "name": "@deepseek-ai/dsh-config-editor",
+  "state": "conditional (!!js)",
+  "disabledExpr": "!ctx.get('profileContext')",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Live Config forms persist through the active profile patch.\nLive configuration forms persist through the launcher's profile."
+  ]
+ },
+ {
+  "id": "settings",
+  "name": "@deepseek-ai/dsh-settings",
+  "state": "conditional (!!js)",
+  "disabledExpr": "!ctx.get('profileContext')",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "authorization",
+  "name": "@deepseek-ai/dsh-authorization",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Credential sources: inherited environment over the managed\n`$DSH_HOME/.credentials.yaml`, with project and user `.env` fallbacks.\nAdapters resolve references per request; the Models page writes only the\nmanaged document, which is never materialized into the process environment."
+  ]
+ },
+ {
+  "id": "deepseek-account",
+  "name": "@deepseek-ai/dsh-deepseek-account-platform",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "desktopPlatform": "ctx.get('profileContext')?.name === 'desktop' && ['darwin', 'win32'].includes(process.platform) ? process.platform : null"
+  },
+  "rationale": []
+ },
+ {
+  "id": "credentials",
+  "name": "@deepseek-ai/dsh-credentials-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "llm-pi-ai",
+  "name": "@deepseek-ai/dsh-llm-pi-ai",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The pi-ai multi-provider twin, mounted dormant: zero routes (and no extra\nmodels in the picker) until a `llm-pi-ai:` settings section supplies provider\nprofiles — then those routes register live, keys resolving per request\nthrough their apiKeyEnv references, and drop again when the section empties.\nSupplying those profiles is exactly what the web Models page does. Which\nadapters exist is composition; which providers run is the user's settings\ndocument."
+  ]
+ },
+ {
+  "id": "session-persistence-jsonl",
+  "name": "@deepseek-ai/dsh-session-persistence-jsonl",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "root": "dshHomePath('sessions')"
+  },
+  "rationale": []
+ },
+ {
+  "id": "attachment-local",
+  "name": "@deepseek-ai/dsh-attachment-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Durable image bytes live outside the append-only session log. Messages\nkeep content-addressed references that this shared backend resolves for\nprovider requests and authorized history reads."
+  ]
+ },
+ {
+  "id": "session-query-sqlite",
+  "name": "@deepseek-ai/dsh-session-query-sqlite",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "path": ":memory:",
+   "openAt": "never"
+  },
+  "rationale": [
+   "Full-text session search is opt-in. `openAt: never` keeps\nctx.sessionQuery mounted — exact reads, titles, and lineage traces\n(session export, subagent-fork Workspace inheritance) stay available —\nwhile search calls fail with SESSION_QUERY_SEARCH_DISABLED and SQLite is\nnever opened; the Web sidebar search matches titles and workspace names\nonly. Deployments enabling content search override `openAt` to\n`first-search` or `startup` in a later patch layer (profile\ncordis.patch.yml or a --patch overlay), typically with a durable `path`.",
+   "Full-text session search is opt-in (the base row's `openAt: never`). This\nrestatement keeps the Web values on one ephemeral in-memory index; a\ndeployment enabling content search overrides `openAt` to `first-search` in a\nlater patch layer, which defers the node:sqlite import and in-memory handle\nto the first search so Node 22 startup stays quiet."
+  ]
+ },
+ {
+  "id": "session-projection",
+  "name": "@deepseek-ai/dsh-session-projection",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Shared projection registry: subagent catalog identity (mode/label) folds\nthrough its registered units, so the `list_agents` surface below fails\nloud without it; web layers reuse this same mount for list rows."
+  ]
+ },
+ {
+  "id": "storage",
+  "name": "@deepseek-ai/dsh-storage",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Durable KV storage: the storage hub, the json backend, and the\nschema-validated domain form over them. Session-layer persistence (the\nprojection cache below; workspace in web layers)\nroutes through this stack, so it belongs to the shared base."
+  ]
+ },
+ {
+  "id": "storage-json",
+  "name": "@deepseek-ai/dsh-storage-json",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "root": "dshHomePath('storages')"
+  },
+  "rationale": []
+ },
+ {
+  "id": "storage-domain",
+  "name": "@deepseek-ai/dsh-storage-domain",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "backend": "json"
+  },
+  "rationale": []
+ },
+ {
+  "id": "session-projection-cache",
+  "name": "@deepseek-ai/dsh-session-projection-cache",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "writeEveryEvents": 200,
+   "writeIntervalMs": 5000
+  },
+  "rationale": [
+   "Persisted projection cache: throttled write-behind over the\nsession_projcache domain (per-record layout — one version-stamped\ncheckpoint document per session), serving the session listing's\nprojection column."
+  ]
+ },
+ {
+  "id": "otel",
+  "name": "@deepseek-ai/dsh-otel",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "session-telemetry-otel",
+  "name": "@deepseek-ai/dsh-session-telemetry-otel",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "mode": "process.env.DSH_TELEMETRY_MODE || 'FEEDBACK_ONLY'",
+   "shutdownTimeoutMillis": 3000,
+   "maxRequestBytes": 4000000,
+   "exporter": {
+    "url": "process.env.DSH_TELEMETRY_OTLP_URL ?? 'https://dsh-otel-collector.deepseeksvc.com/v1/logs'",
+    "compression": "gzip",
+    "timeoutMillis": 1000
+   },
+   "processor": {
+    "scheduledDelayMillis": 10000,
+    "maxQueueSize": 2048,
+    "maxExportBatchSize": 2048,
+    "exportTimeoutMillis": 1500
+   }
+  },
+  "rationale": [
+   "OTel releases a Session-log prefix only after explicit user feedback,\nregardless of model provider. Ordinary activity never triggers capture.\nDSH_TELEMETRY_OTLP_URL overrides the production endpoint. A non-empty\nDSH_TELEMETRY_DISABLED — any value, including '0'/'false' — opts the\nprocess out (the launchers patch the row disabled; config cannot disable\na row). Exports carry the harness home's anonymous user id ($DSH_HOME/.anonymous-user-id,\nrandom UUID; delete the file to reset the identity) as the Resource's\nuser.id. Byte-bounded batching may turn an authorized prefix into\nseveral HTTP requests. Requests run serially; each has its own 1s\ntransport timeout and 1.5s watchdog. A watchdog does not release the\nactive request slot. The outer 3s shutdown deadline stops queued sends;\nlarge prefixes or an unsettled transport may leave records unsent.\nEvery CLI exit path drains by disposing the root on SIGINT/SIGTERM."
+  ]
+ },
+ {
+  "id": "subprocess",
+  "name": "@deepseek-ai/dsh-subprocess-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "sandbox",
+  "name": "@deepseek-ai/dsh-sandbox-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Every shipped CLI mode starts with the same file-effect boundary.\nThe environment remains an explicit deployment override; otherwise fresh\nsessions pin workspace-write + ask through the permission service below."
+  ]
+ },
+ {
+  "id": "sandbox-policy",
+  "name": "@deepseek-ai/dsh-sandbox-policy",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "mode": "process.env.DSH_PERMISSION_MODE ?? 'workspace-write'",
+   "workspaceRoot": "process.cwd()"
+  },
+  "rationale": []
+ },
+ {
+  "id": "bash-sandbox",
+  "name": "@deepseek-ai/dsh-bash-sandbox",
+  "state": "conditional (!!js)",
+  "disabledExpr": "process.platform === 'win32'",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "timeoutMs": 60000
+  },
+  "rationale": []
+ },
+ {
+  "id": "pwsh-sandbox",
+  "name": "@deepseek-ai/dsh-pwsh-sandbox",
+  "state": "conditional (!!js)",
+  "disabledExpr": "process.platform !== 'win32'",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "approval",
+  "name": "@deepseek-ai/dsh-user-approval",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "policy": "(process.env.DSH_PERMISSION_MODE ?? 'workspace-write') === 'danger-full-access' ? 'never' : 'ask'"
+  },
+  "rationale": []
+ },
+ {
+  "id": "permission",
+  "name": "@deepseek-ai/dsh-permission-presets",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "presets": {
+    "read-only": {
+     "sandbox": "read-only",
+     "approval": "ask"
+    },
+    "workspace-write": {
+     "sandbox": "workspace-write",
+     "approval": "ask"
+    },
+    "danger-full-access": {
+     "sandbox": "danger-full-access",
+     "approval": "never"
+    }
+   }
+  },
+  "rationale": []
+ },
+ {
+  "id": "shell-env",
+  "name": "@deepseek-ai/dsh-shell-env",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-bash",
+  "name": "@deepseek-ai/dsh-tool-bash",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-pwsh",
+  "name": "@deepseek-ai/dsh-tool-pwsh",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-jobs",
+  "name": "@deepseek-ai/dsh-tool-jobs",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The background-job REGISTRY stays on the host plane; only the model-facing\n`job_*` controls move. Its producers — `tool-bash` here, `tool-terminal` and a\nnon-continuable `tool-subagent` elsewhere — are preset rows that resolve it\nwith `ctx.get`, and an entry-local realm around the registry is invisible to\nevery sibling row outside that realm, so `run_in_background` answered\n\"background jobs unavailable\" while the controls sat in the catalog. That is\nthe `goals` criterion read from inside the preset: a Service a row outside its\nrealm READS belongs to the plane both can see. The registry is keyed by owning\nagent, so one host instance serves every session exactly as before presets."
+  ]
+ },
+ {
+  "id": "fs-observation-policy",
+  "name": "@deepseek-ai/dsh-fs-observation-policy",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-fs",
+  "name": "@deepseek-ai/dsh-tool-fs",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-fs-search",
+  "name": "@deepseek-ai/dsh-tool-fs-search",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "sampleOverCapGlobResults": false
+  },
+  "rationale": []
+ },
+ {
+  "id": "agent-instructions",
+  "name": "@deepseek-ai/dsh-agent-instructions",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "maxBytes": 65536
+  },
+  "rationale": []
+ },
+ {
+  "id": "skill",
+  "name": "@deepseek-ai/dsh-skill",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "skill-filesystem",
+  "name": "@deepseek-ai/dsh-skill-filesystem",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The `skill` REGISTRY stays in the host plane. It is host+per-scope layered\n(the tools-registry shape): deployment-level providers — repository plugins,\na host skill-filesystem row — register into its global layer, while a preset's\n`skill-filesystem` registers into that preset's layer, and each agent reads the\nmerged catalog its scope chain selects. Only the per-agent rows move behind\npresets: the base host `skill-filesystem` row is disabled here (presets own local\ndiscovery), and `tool-skill` is what a preset mounts to give its agent the\ncatalog and loader at all."
+  ]
+ },
+ {
+  "id": "skill-badge",
+  "name": "@deepseek-ai/dsh-skill-badge",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-skill",
+  "name": "@deepseek-ai/dsh-tool-skill",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "commands",
+  "name": "@deepseek-ai/dsh-commands",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "command-feedback",
+  "name": "@deepseek-ai/dsh-command-feedback",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "goal",
+  "name": "@deepseek-ai/dsh-goal",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "goal-round-driver",
+  "name": "@deepseek-ai/dsh-goal-round-driver",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "command-goal",
+  "name": "@deepseek-ai/dsh-command-goal",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The goal service and session driver stay on the host plane, where Gateway\nremotes resolve them. Presets own the human command and model-facing tool."
+  ]
+ },
+ {
+  "id": "plan-mode",
+  "name": "@deepseek-ai/dsh-plan-mode",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "section": "You are in plan mode. Stay in plan mode until exit_plan_mode succeeds or the user switches the session mode. Imperative language to implement changes means plan the implementation, not execute it. A user's conversational agreement — including an answer confirming something you asked — approves nothing and does not end plan mode; fold the confirmed decision into the plan and submit it through exit_plan_mode.\n\nExplore first. Use non-mutating reads, searches, static analysis, and checks to ground the plan in the actual repository. Do not edit or write files, change configuration, run formatters or code generation that rewrites tracked files, commit, or otherwise carry out the plan. Prefer existing functions and patterns over new machinery.\n\nThe tool catalog stays the same across modes for request-cache stability. These plan-mode rules override any later tool description or guidance that suggests using mutation tools; those tools remain listed only to keep the request shape stable. Do not use todo_write to track this planning phase: it tracks implementation after an approved plan, while the plan itself belongs in exit_plan_mode.\n\nResolve discoverable facts by inspection. Use ask_user_question only for user-owned choices or material ambiguity that inspection cannot answer. Do not ask the user where code lives or how current behavior works when you can find out.\n\nMake the plan decision-complete: state the goal and success criteria; group implementation changes by subsystem; identify public API, schema, and data-flow changes; cover edge cases, failure modes, tests, acceptance criteria, and explicit assumptions. Keep it concise enough to review but detailed enough that another engineer can implement it without making design decisions.\n\nWhen ready, call exit_plan_mode with the complete plan markdown, starting with a # title. Make exit_plan_mode the only and final tool call in that assistant response: it presents the plan for approval, and implementation begins only in a later step after approval. Do not paste the final plan as a plain reply or ask \"should I proceed?\" through prose or ask_user_question. If review rejects it, incorporate the feedback and present again. If the review channel is unavailable or aborted, stay in plan mode and ask the user to switch modes manually; do not proceed with implementation.\n"
+  },
+  "rationale": []
+ },
+ {
+  "id": "token-meter",
+  "name": "@deepseek-ai/dsh-token-meter",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "compaction-basic",
+  "name": "@deepseek-ai/dsh-compaction-basic",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The token METER stays on the host plane; only the compaction backend that\nreads it moves. It owns the context-meter projection units, and that table is\nprocess-wide, so preset ownership would make the meter a function of which\npresets happen to be mounted rather than a per-session fact. Same criterion as\n`tasks` and `goals`; the reasoning has one home in\n`.agents/notes/implemented/architecture/2026-08-10-host-plane-ownership-after-presets.md`."
+  ]
+ },
+ {
+  "id": "command-compact",
+  "name": "@deepseek-ai/dsh-command-compact",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Human `/compact`: one useful reduction below the automatic threshold. Backend\nindependent, so it follows whichever compaction service this leaf mounts."
+  ]
+ },
+ {
+  "id": "subagent",
+  "name": "@deepseek-ai/dsh-subagent",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "subagent-spawn-in-process",
+  "name": "@deepseek-ai/dsh-subagent-spawn-in-process",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "providerName": "spawn"
+  },
+  "rationale": []
+ },
+ {
+  "id": "subagent-fork-in-process",
+  "name": "@deepseek-ai/dsh-subagent-fork-in-process",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "providerName": "fork"
+  },
+  "rationale": []
+ },
+ {
+  "id": "tool-subagent-control",
+  "name": "@deepseek-ai/dsh-tool-subagent-control",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Continuable background children are selected per delegation tool. The\nseparately loaded follow-up tool registers the one global `send_message`.",
+   "The subagent registry and its backends STAY in the host plane. `subagents` is\na process singleton with a cross-session query surface (`listChildren`,\n`followup`) that the host api-proxy serves to the browser, and a provider\nregisters under a globally unique name, so a per-session copy would both\nstarve that host row and collide on the second session. What a preset\nchooses is which delegation TOOLS its agent sees, below."
+  ]
+ },
+ {
+  "id": "tool-subagent-list-agents",
+  "name": "@deepseek-ai/dsh-tool-subagent-control/list-agents",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-subagent",
+  "name": "@deepseek-ai/dsh-tool-subagent",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "provider": "spawn",
+   "toolName": "subagent",
+   "backgroundMode": "continuable"
+  },
+  "rationale": []
+ },
+ {
+  "id": "tool-subagent-fork",
+  "name": "@deepseek-ai/dsh-tool-subagent",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "provider": "fork",
+   "toolName": "subagent_fork",
+   "backgroundMode": "one-shot"
+  },
+  "rationale": [
+   "Fork omits model selection so provider/model stay equal to the parent and\nthe inherited history remains eligible for KV Cache reuse. This base row\nstays one-shot; preset layers may select continuable mode without adding a\nchild-only system-prompt section or tool schema ahead of that history.\nSee .agents/notes/implemented/feature/2026-08-18-model-selected-subagent-routes.md\nand .agents/notes/implemented/architecture/2026-08-10-fork-children-stay-one-shot.md."
+  ]
+ },
+ {
+  "id": "ptc-runtime",
+  "name": "@deepseek-ai/dsh-ptc-runtime-node",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "workflow-ptc",
+  "name": "@deepseek-ai/dsh-workflow-ptc",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "provider": "spawn"
+  },
+  "rationale": []
+ },
+ {
+  "id": "tool-workflow",
+  "name": "@deepseek-ai/dsh-tool-workflow",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "timeout-policy",
+  "name": "@deepseek-ai/dsh-tool-call-timeout-policy",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "spill-local",
+  "name": "@deepseek-ai/dsh-spill-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "spill-policy",
+  "name": "@deepseek-ai/dsh-spill-policy",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "maxInlineTokens": 12500
+  },
+  "rationale": []
+ },
+ {
+  "id": "session-checkpoint-policy",
+  "name": "@deepseek-ai/dsh-session-checkpoint-policy",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Durability checkpoints before each model request and top-level dispatch."
+  ]
+ },
+ {
+  "id": "tool-result-pruner",
+  "name": "@deepseek-ai/dsh-compaction-tool-result-pruner",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "thresholdChars": 8192,
+   "headChars": 4096,
+   "tailChars": 1024
+  },
+  "rationale": [
+   "Compacts oversized tool results before the broader conversation compactor\nruns, preserving the model-visible result within the configured budget."
+  ]
+ },
+ {
+  "id": "image-offload",
+  "name": "@deepseek-ai/dsh-compaction-image-offload",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "When an image-capable route rejects a request as over its image budget,\nreplace the oldest images with placeholders on the surface and retry."
+  ]
+ },
+ {
+  "id": "tool-todo",
+  "name": "@deepseek-ai/dsh-tool-todo",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "allowParallelInProgress": true
+  },
+  "rationale": []
+ },
+ {
+  "id": "tool-goal",
+  "name": "@deepseek-ai/dsh-tool-goal",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Persisted same-session goals reach the model and the slash menu here; the\ndomain, driver, and `/goal` command are above."
+  ]
+ },
+ {
+  "id": "tool-ralph",
+  "name": "@deepseek-ai/dsh-tool-ralph",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "subagentProvider": "spawn",
+   "maxRounds": 64
+  },
+  "rationale": [
+   "Fresh-agent Ralph iteration over a build-time-fixed script. Off by\ndefault: the tool description restricts `ralph` to runs the human\nexplicitly asked for, and completion is a worker self-report, not an\nindependent evaluation. An overlay row restores it for a base-backed\nprofile (`$DSH_HOME/cordis.patch.yml`, or a `--patch <file>`):\n  - id: tool-ralph\n    disabled: false",
+   "`base` ships this row disabled; the preset-plane gate reads declared row ids\nwithout regard to `disabled`, so this row must stay to keep `tool-ralph` off\nthe host plane and out of collision with every preset's row."
+  ]
+ },
+ {
+  "id": "repeat-tool-reminder",
+  "name": "@deepseek-ai/dsh-repeat-tool-reminder",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "thresholds": [
+    3,
+    5,
+    8
+   ],
+   "argumentsPreviewChars": 500
+  },
+  "rationale": [
+   "Consecutive-repeat reminders on the tool chain."
+  ]
+ },
+ {
+  "id": "web",
+  "name": "@deepseek-ai/dsh-web",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "searchProvider": "deepseek-official",
+   "fetchProvider": "http"
+  },
+  "rationale": [
+   "The shared base enables the stable model-facing web_search and web_fetch\ntools. The Web app disables this host row and composes both tools per agent\npreset; products with a stricter network policy override tool-web. DeepSeek\nsearch resolves the same DEEPSEEK_API_KEY\ncredential the Models page manages for chat, at each search; its Messages\nendpoint is configured independently from the model route, so it takes its own\nbase-URL override. Anonymous fetch accepts only public HTTP(S) destinations,\nresolves and validates every destination, and pins every actual connection.\nSearch is a full auxiliary model request with server-side retrieval, so this\nshipped DeepSeek route gets 60s while the provider-neutral tool default\nremains 30s."
+  ]
+ },
+ {
+  "id": "web-search-deepseek",
+  "name": "@deepseek-ai/dsh-web-search-deepseek",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "apiKeyEnv": "DEEPSEEK_API_KEY"
+  },
+  "rationale": []
+ },
+ {
+  "id": "web-fetch-http",
+  "name": "@deepseek-ai/dsh-web-fetch-http",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tool-web",
+  "name": "@deepseek-ai/dsh-tool-web",
+  "state": "disabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "fetch": true,
+   "searchTimeoutMs": 60000
+  },
+  "rationale": []
+ },
+ {
+  "id": "mcp-resources",
+  "name": "@deepseek-ai/dsh-mcp-resources",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "tools",
+  "name": "@deepseek-ai/dsh-tools",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "mode": "process.env.DSH_TOOLS_MODE"
+  },
+  "rationale": [
+   "── rows every mode mounts, whose values each overlay may state ──────────────\nThe tool registry. Presentation mode is a deployment choice; omitting it here\nkeeps the schema default (native)."
+  ]
+ },
+ {
+  "id": "system-prompt",
+  "name": "@deepseek-ai/dsh-system-prompt",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base <- dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "personaSuffix": "Your working directory is {{cwd}}.",
+   "personaPrefix": "You are a coding agent powered by the {{model}} model."
+  },
+  "rationale": [
+   "The deployment persona is a deployment choice; plan-mode and tool plugins own\ntheir own prompt sections.",
+   "The dsh-web-app bundle patch: the browser surface over the dsh-base layer.\nApplied after dsh-base's insert; rows here override base rows by id, with\nthe profile's own cordis.patch.yml and any --patch overlays still to come.\n\nA patch replaces the targeted row's whole `config`, so each row below\nrestates every key it owns.\n\nThe web-startup plugin injects `cmdlineArgs` and provides `webStartup` as an\nordinary Cordis service. Rows configured from flags inject that service, so\nLoader resolves their expressions only after it exists. The web runtime then\nprovides bind-dependent `webRuntime` values to the trust fence.\n`dsh --profile web --help` provides neither service, so no server binds.\n── surface-specific values the base deliberately omits ─────────────────────"
+  ]
+ },
+ {
+  "id": "agent-loop",
+  "name": "@deepseek-ai/dsh-agent-loop",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": true,
+  "config": {
+   "agents": []
+  },
+  "rationale": [
+   "Agents created at startup. The base stays empty; raw overlays may create\nagents, while Web creates sessions on client request."
+  ]
+ },
+ {
+  "id": "fs-sandbox",
+  "name": "@deepseek-ai/dsh-fs-sandbox",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The sandboxed filesystem provider. `cwd` defaults to `process.cwd()`; an\noverlay can pin another workspace."
+  ]
+ },
+ {
+  "id": "llm-deepseek",
+  "name": "@deepseek-ai/dsh-llm-deepseek-api-key",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The native DeepSeek adapter. No key or endpoint is inlined: both resolve per\nrequest from the `llm-deepseek:` settings section over this entry, with the\nkey coming from the credential store below. Thinking defaults are a deployment\nchoice."
+  ]
+ },
+ {
+  "id": "llm-deepseek-account",
+  "name": "@deepseek-ai/dsh-llm-deepseek-account",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-base",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "desktop-product-telemetry",
+  "name": "@deepseek-ai/dsh-host-product-telemetry-otel",
+  "state": "conditional (!!js)",
+  "disabledExpr": "ctx.get('profileContext')?.name !== 'desktop'",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "scheduledDelayMillis": 30000,
+   "timeoutMillis": 15000,
+   "exportTimeoutMillis": 20000,
+   "shutdownTimeoutMillis": 2000,
+   "serviceName": "deepseek-harness-desktop",
+   "serviceVersion": "process.env.DSH_CLIENT_VERSION",
+   "endpoint": "process.env.DSH_PRODUCT_ANALYTICS_OTLP_URL"
+  },
+  "rationale": []
+ },
+ {
+  "id": "product-analytics",
+  "name": "@deepseek-ai/dsh-client-product-analytics",
+  "state": "conditional (!!js)",
+  "disabledExpr": "ctx.get('profileContext')?.name !== 'desktop'",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "enabled": true,
+   "appVersion": "process.env.DSH_CLIENT_VERSION"
+  },
+  "rationale": []
+ },
+ {
+  "id": "subagent-model-selection-settings",
+  "name": "@deepseek-ai/dsh-tool-subagent/model-selection-settings",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Host-owned opt-in sampled when a new Web session receives its preset\ndelegation tools. The Plugins page edits this settings namespace."
+  ]
+ },
+ {
+  "id": "message-feedback",
+  "name": "@deepseek-ai/dsh-message-feedback",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "maxNoteBytes": 8192
+  },
+  "rationale": []
+ },
+ {
+  "id": "session-log-download",
+  "name": "@deepseek-ai/dsh-session-log-export",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Browser Session export: `/export` command plus the shared download dialog."
+  ]
+ },
+ {
+  "id": "open-in-app",
+  "name": "@deepseek-ai/dsh-host-open-in-app",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "probeTimeoutMs": 10000,
+   "iconTimeoutMs": 10000,
+   "launchWatchMs": 1000
+  },
+  "rationale": [
+   "Session-header \"Open In...\" split button over the host application\nresolution (macOS/Windows/Linux; a host with no resolved application\nrenders no button). Two halves: the host routes and the browser surface."
+  ]
+ },
+ {
+  "id": "ui-open-in-app",
+  "name": "@deepseek-ai/dsh-client-ui-open-in-app",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "workspace",
+  "name": "@deepseek-ai/dsh-workspace",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "session-reference",
+  "name": "@deepseek-ai/dsh-session-reference",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "file-reference-local",
+  "name": "@deepseek-ai/dsh-file-reference-local",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "session-stats",
+  "name": "@deepseek-ai/dsh-session-stats",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Whole-log turn/step counts for the chat stats strip (the sessionStats\nprojection key); the projection registry itself is a base-layer row."
+  ]
+ },
+ {
+  "id": "session-turn-outline",
+  "name": "@deepseek-ai/dsh-session-turn-outline",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Whole-log turn outline for the chat turn rail (the turnOutline\nprojection key): every turn stays navigable before its events page in."
+  ]
+ },
+ {
+  "id": "directory-picker",
+  "name": "@deepseek-ai/dsh-host-directory-picker-auto",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Resolve bind host, SSH launch, and display once at boot, then mount the\nmatching dual-face directory picker. Mount -native or -browse directly in\nan overlay to pin the interaction."
+  ]
+ },
+ {
+  "id": "plugin-inventory",
+  "name": "@deepseek-ai/dsh-host-plugin-inventory",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Read-only projection of current Loader entries for trusted client RPCs."
+  ]
+ },
+ {
+  "id": "session-controller",
+  "name": "@deepseek-ai/dsh-api-session-controller",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Session commands, cold reads, and live control over Typert Remote."
+  ]
+ },
+ {
+  "id": "job-controller",
+  "name": "@deepseek-ai/dsh-api-job-controller",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "One background job's observation record streamed over Typert Remote;\nthe roster rides the session control stream above."
+  ]
+ },
+ {
+  "id": "terminal-controller",
+  "name": "@deepseek-ai/dsh-api-terminal-controller",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Workspace file service: bounded read, directory listing, and the\nagent-write change feed inside the session workspace root."
+  ]
+ },
+ {
+  "id": "workspace-files",
+  "name": "@deepseek-ai/dsh-api-workspace-files",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-settings-account",
+  "name": "@deepseek-ai/dsh-client-ui-settings-account",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Configuration-surface reads and writes over Typert Remote. Each method\nreports an actionable error when its settings-domain provider is absent."
+  ]
+ },
+ {
+  "id": "account-controller",
+  "name": "@deepseek-ai/dsh-api-account-controller",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "settings-controller",
+  "name": "@deepseek-ai/dsh-api-settings-controller",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "workspace-controller",
+  "name": "@deepseek-ai/dsh-api-workspace-controller",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Workspace commands and reconnect-safe projection over Typert Remote."
+  ]
+ },
+ {
+  "id": "cordis-host-runner",
+  "name": "@deepseek-ai/dsh-cordis-host-runner",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "cordis-inspect-providers",
+  "name": "@deepseek-ai/dsh-tool-cordis/host",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The Host inspect providers are process-global: the registry rejects a\nduplicate id, so they register here once and every preset's `tool-cordis`\nrow reads them."
+  ]
+ },
+ {
+  "id": "web-startup",
+  "name": "@deepseek-ai/dsh-web-app/startup",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Ordinary provider for the parsed Web flags. Its plugin-level injection\nwaits for cmdlineArgs; no launcher metadata or special row kind is needed."
+  ]
+ },
+ {
+  "id": "webserver",
+  "name": "@deepseek-ai/dsh-host-webserver",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "host": "ctx.webStartup.host ?? '127.0.0.1'",
+   "port": "ctx.webStartup.port ?? 3080",
+   "compression": "gzip",
+   "compressionLevel": 1,
+   "compressionThresholdBytes": 1024
+  },
+  "rationale": [
+   "── layer 2: transport/service ──────────────────────────────────────────────\nPlain route-registration carrier; host and port come from the app's\nwebStartup provider, with these deployment fallbacks. The dist is served by\nthe web-runtime row below through the fallback seat."
+  ]
+ },
+ {
+  "id": "web-runtime",
+  "name": "@deepseek-ai/dsh-web-app",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "openBrowser": "ctx.webStartup.openBrowser",
+   "printUrl": true,
+   "surfaceContext": true,
+   "trustedHosts": "ctx.webStartup.trustedHosts"
+  },
+  "rationale": [
+   "Web glue owned by this bundle: resolves the built frontend dist (an\nassembly fact of dsh-web-app, never user config), mounts the\nfrontend-static fallback owner, registers the web-surface prompt\nsection and the bash runtime variable, prints the URL line, and opens the\ncanonical local URL after the full Loader tree settles and the required-\nentry audit passes. The\nwebStartup provider supplies invocation-only values; after the server binds, this row samples\nLAN trust once and provides `webRuntime`. A complete agent-preset persona\nsuppresses the prompt section for that agent while retaining the host-owned\nshell variable."
+  ]
+ },
+ {
+  "id": "client-hmr",
+  "name": "@deepseek-ai/dsh-client-hmr",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The client-plugin reload chain, always mounted: it is idle until a\nrebuild watcher (pnpm run dev:web) actually rewrites client bundles. It\nis a row rather than a child of web-runtime because its node half is a\nclient-side package, which a host-side bundle cannot import."
+  ]
+ },
+ {
+  "id": "modules",
+  "name": "@deepseek-ai/dsh-client-modules",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "── browser plugin roster (dsh.client rows; node halves are layer-2 hosts) ──\nDual-face: the node half scans this tree, composes window.__DSH_BOOT__,\nand serves /plugins/<id>/client.js; the browser half is the module table\nthe shell kernel constructs before cordis exists (adopted as a plugin\nentry by the kernel, never fetched)."
+  ]
+ },
+ {
+  "id": "connection",
+  "name": "@deepseek-ai/dsh-client-connection",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "trustedHosts": "ctx.webRuntime.trustedHosts"
+  },
+  "rationale": [
+   "Owns both ends of the web transport: node half binds the gateway to the\nwebserver under /api; browser half is the fetch/SSE client."
+  ]
+ },
+ {
+  "id": "file-upload",
+  "name": "@deepseek-ai/dsh-client-file-upload",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Raw Blob and ReadableStream uploads run independently of Connection's\nRPC and generation service."
+  ]
+ },
+ {
+  "id": "api-remotes",
+  "name": "@deepseek-ai/dsh-api-remotes",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "cordis-client-runner",
+  "name": "@deepseek-ai/dsh-cordis-client-runner",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-theme",
+  "name": "@deepseek-ai/dsh-client-ui-theme",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "locale",
+  "name": "@deepseek-ai/dsh-client-locale",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "shortcuts",
+  "name": "@deepseek-ai/dsh-client-shortcuts",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-shortcuts",
+  "name": "@deepseek-ai/dsh-client-ui-shortcuts",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-layout",
+  "name": "@deepseek-ai/dsh-client-ui-layout",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-renderer",
+  "name": "@deepseek-ai/dsh-client-ui-renderer",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-session",
+  "name": "@deepseek-ai/dsh-client-ui-session",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "resources",
+  "name": "@deepseek-ai/dsh-client-resources",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Unified resource model: protocol providers behind the useResource hook."
+  ]
+ },
+ {
+  "id": "ui-sidebar",
+  "name": "@deepseek-ai/dsh-client-ui-sidebar",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-sidebar-right",
+  "name": "@deepseek-ai/dsh-client-ui-sidebar-right",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The right Sidebar: one docking surface per session over ui-dockkit."
+  ]
+ },
+ {
+  "id": "office-to-pdf",
+  "name": "@deepseek-ai/dsh-office-to-pdf",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-sidebar-documentpreview",
+  "name": "@deepseek-ai/dsh-client-ui-sidebar-documentpreview",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The right Sidebar's document tab: bounded file reads with selectable\nMarkdown, code, HTML, PDF, Office, and plain-text renderers."
+  ]
+ },
+ {
+  "id": "ui-sidebar-browser",
+  "name": "@deepseek-ai/dsh-client-ui-sidebar-browser",
+  "state": "conditional (!!js)",
+  "disabledExpr": "ctx.get('profileContext')?.name !== 'desktop'",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Web profiles opt in; Desktop retains sandboxed HTTP(S) Browser tabs."
+  ]
+ },
+ {
+  "id": "ui-sidebar-terminal",
+  "name": "@deepseek-ai/dsh-client-ui-sidebar-terminal",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-sidebar-files",
+  "name": "@deepseek-ai/dsh-client-ui-sidebar-files",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The right Sidebar's workspace file tree tab type."
+  ]
+ },
+ {
+  "id": "ui-settings",
+  "name": "@deepseek-ai/dsh-client-ui-settings",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-settings-general",
+  "name": "@deepseek-ai/dsh-client-ui-settings-general",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-settings-models",
+  "name": "@deepseek-ai/dsh-client-ui-settings-models",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-plugin-manager",
+  "name": "@deepseek-ai/dsh-client-ui-plugin-manager",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Plugin management: the sidebar Plugins page installs, enables, disables,\nand removes the profile's bundles through the `pluginManager` Remote.\nWithout a profile-backed Host it reports itself unavailable."
+  ]
+ },
+ {
+  "id": "ui-settings-plugin-inventory",
+  "name": "@deepseek-ai/dsh-client-ui-settings-plugin-inventory",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Read-only Plugin list tab in the Settings Plugins section; the built-in\nbundles the sidebar page leaves out are inspected here."
+  ]
+ },
+ {
+  "id": "ui-conversation",
+  "name": "@deepseek-ai/dsh-client-ui-conversation",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-approval",
+  "name": "@deepseek-ai/dsh-client-ui-approval",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-chat",
+  "name": "@deepseek-ai/dsh-client-ui-chat",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-brand-official",
+  "name": "@deepseek-ai/dsh-client-ui-brand-official",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Official occupants for the generic sidebar and conversation brand slots."
+  ]
+ },
+ {
+  "id": "ui-attachment",
+  "name": "@deepseek-ai/dsh-client-ui-attachment",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-tool",
+  "name": "@deepseek-ai/dsh-client-ui-tool",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Tool call tree, generic fallback, and keyed business Tool views."
+  ]
+ },
+ {
+  "id": "ui-cordis",
+  "name": "@deepseek-ai/dsh-client-ui-cordis",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-deliverables",
+  "name": "@deepseek-ai/dsh-client-ui-deliverables",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Turn tail: the changed-files card and delivery cards under each closing\nassistant message. Remove this entry to turn the surface off; the tail\nhole renders empty."
+  ]
+ },
+ {
+  "id": "workspace-changes",
+  "name": "@deepseek-ai/dsh-workspace-changes",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Records each top-level turn's changed files from git working-tree\nsnapshots; the changed-files card above renders its events."
+  ]
+ },
+ {
+  "id": "ui-workspace",
+  "name": "@deepseek-ai/dsh-client-ui-workspace",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-workflow-run",
+  "name": "@deepseek-ai/dsh-client-ui-workflow-run",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Durable workflow lifecycle as an independent Chat node after the\nexisting generic workflow tool row."
+  ]
+ },
+ {
+  "id": "ui-input-trigger",
+  "name": "@deepseek-ai/dsh-client-ui-input-trigger",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Input triggers: the '/' | '@' pipeline (ui-input-trigger), the command surface over\nit (ui-commands), and the reference sources (ui-skill / ui-reference)."
+  ]
+ },
+ {
+  "id": "ui-commands",
+  "name": "@deepseek-ai/dsh-client-ui-commands",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-skill",
+  "name": "@deepseek-ai/dsh-client-ui-skill",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-subagent",
+  "name": "@deepseek-ai/dsh-client-ui-subagent",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-reference",
+  "name": "@deepseek-ai/dsh-client-ui-reference",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-jobs",
+  "name": "@deepseek-ai/dsh-client-ui-jobs",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Background jobs: the session-header roster with on-demand streaming\nrecord panels over the session job-output service."
+  ]
+ },
+ {
+  "id": "ui-goal",
+  "name": "@deepseek-ai/dsh-client-ui-goal",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Goal surface: GoalBar in the input dock over the goal session projection."
+  ]
+ },
+ {
+  "id": "ui-message-feedback",
+  "name": "@deepseek-ai/dsh-client-ui-message-feedback",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The feedback surface: Like/Dislike in the assistant-message action\nstrip, the feedback dialog behind Dislike and /feedback with its\nacknowledgement toast, over the messageFeedback and sessionFeedback Remotes."
+  ]
+ },
+ {
+  "id": "ui-model-selection",
+  "name": "@deepseek-ai/dsh-client-ui-model-selection",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Model selection: the /model popupSelect + composer seat over session.models."
+  ]
+ },
+ {
+  "id": "ui-permission",
+  "name": "@deepseek-ai/dsh-client-ui-permission-presets",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-agent-preset",
+  "name": "@deepseek-ai/dsh-client-ui-agent-preset",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The agent-preset row in General settings: the default preset for\nsessions created later. Absent a roster it renders nothing."
+  ]
+ },
+ {
+  "id": "ui-settings-session-log",
+  "name": "@deepseek-ai/dsh-client-ui-settings-session-log",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-settings-plugins",
+  "name": "@deepseek-ai/dsh-client-ui-settings-plugins",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The Built-in plugins settings section: the navigation entry and the tab\nrow the inventory tab registers into. The official configuration pages\nare the companion rows below."
+  ]
+ },
+ {
+  "id": "ui-settings-shell",
+  "name": "@deepseek-ai/dsh-client-ui-settings-shell",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "The official settings pages: one companion package per host-plane\nnamespace, each registering its page into the Plugins page while the\nHost serves the namespace."
+  ]
+ },
+ {
+  "id": "ui-settings-agent-loop",
+  "name": "@deepseek-ai/dsh-client-ui-settings-agent-loop",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-settings-subagent",
+  "name": "@deepseek-ai/dsh-client-ui-settings-subagent",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-settings-web-search",
+  "name": "@deepseek-ai/dsh-client-ui-settings-web-search",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-plan",
+  "name": "@deepseek-ai/dsh-client-ui-plan",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": [
+   "Plan control: the composer plan seat over the plan projection + /plan channel."
+  ]
+ },
+ {
+  "id": "ui-user-questions",
+  "name": "@deepseek-ai/dsh-client-ui-user-questions",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "ui-trajectory",
+  "name": "@deepseek-ai/dsh-client-ui-trajectory",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": false,
+  "config": null,
+  "rationale": []
+ },
+ {
+  "id": "agent-preset-registry",
+  "name": "@deepseek-ai/dsh-agent-preset-registry",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "dsh-web-app",
+  "hasConfig": true,
+  "config": {
+   "default": "standard"
+  },
+  "rationale": []
+ },
+ {
+  "id": "preset-standard",
+  "name": "@deepseek-ai/dsh-agent-preset",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "preset:standard",
+  "hasConfig": true,
+  "config": {
+   "id": "standard",
+   "order": 1,
+   "plugins": [
+    {
+     "id": "persona",
+     "name": "@deepseek-ai/dsh-persona",
+     "config": {
+      "suffix": "Your working directory is {{cwd}}.",
+      "prefix": "You are a coding agent powered by the {{model}} model."
+     }
+    },
+    {
+     "id": "agent-instructions",
+     "name": "@deepseek-ai/dsh-agent-instructions",
+     "config": {
+      "maxBytes": 65536
+     }
+    },
+    {
+     "id": "tool-bash",
+     "name": "@deepseek-ai/dsh-tool-bash",
+     "disabled": "process.platform === 'win32'"
+    },
+    {
+     "id": "tool-pwsh",
+     "name": "@deepseek-ai/dsh-tool-pwsh",
+     "disabled": "process.platform !== 'win32'"
+    },
+    {
+     "id": "tool-fs",
+     "name": "@deepseek-ai/dsh-tool-fs"
+    },
+    {
+     "id": "tool-fs-search",
+     "name": "@deepseek-ai/dsh-tool-fs-search",
+     "config": {
+      "sampleOverCapGlobResults": false
+     }
+    },
+    {
+     "id": "tool-jobs",
+     "name": "@deepseek-ai/dsh-tool-jobs"
+    },
+    {
+     "id": "skill-filesystem",
+     "name": "@deepseek-ai/dsh-skill-filesystem"
+    },
+    {
+     "id": "tool-skill",
+     "name": "@deepseek-ai/dsh-tool-skill"
+    },
+    {
+     "id": "command-goal",
+     "name": "@deepseek-ai/dsh-command-goal"
+    },
+    {
+     "id": "tool-goal",
+     "name": "@deepseek-ai/dsh-tool-goal"
+    },
+    {
+     "id": "planning",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "planMode": true
+     },
+     "config": [
+      {
+       "id": "plan-mode",
+       "name": "@deepseek-ai/dsh-plan-mode",
+       "config": {
+        "section": "You are in plan mode. Stay in plan mode until exit_plan_mode succeeds or the user switches the session mode. Imperative language to implement changes means plan the implementation, not execute it. A user's conversational agreement — including an answer confirming something you asked — approves nothing and does not end plan mode; fold the confirmed decision into the plan and submit it through exit_plan_mode.\n\nExplore first. Use non-mutating reads, searches, static analysis, and checks to ground the plan in the actual repository. Do not edit or write files, change configuration, run formatters or code generation that rewrites tracked files, commit, or otherwise carry out the plan. Prefer existing functions and patterns over new machinery.\n\nThe tool catalog stays the same across modes for request-cache stability. These plan-mode rules override any later tool description or guidance that suggests using mutation tools; those tools remain listed to keep the tool catalog unchanged. Do not use todo_write to track this planning phase: it tracks implementation after an approved plan, while the plan itself belongs in exit_plan_mode.\n\nResolve discoverable facts by inspection. Use ask_user_question only for user-owned choices or material ambiguity that inspection cannot answer. Do not ask the user where code lives or how current behavior works when you can find out.\n\nMake the plan decision-complete: state the goal and success criteria; group implementation changes by subsystem; identify public API, schema, and data-flow changes; cover edge cases, failure modes, tests, acceptance criteria, and explicit assumptions. Keep it concise enough to review but detailed enough that another engineer can implement it without making design decisions.\n\nWhen ready, call exit_plan_mode with the complete plan markdown, starting with a # title. Make exit_plan_mode the only and final tool call in that assistant response: it presents the plan for approval, and implementation begins only in a later step after approval. Do not paste the final plan as a plain reply or ask \"should I proceed?\" through prose or ask_user_question. If review rejects it, incorporate the feedback and present again. If the review channel is unavailable or aborted, stay in plan mode and ask the user to switch modes manually; do not proceed with implementation.\n"
+       }
+      }
+     ]
+    },
+    {
+     "id": "compaction",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "compaction": true,
+      "toolResultPruner": true
+     },
+     "config": [
+      {
+       "id": "compaction-basic",
+       "name": "@deepseek-ai/dsh-compaction-basic"
+      },
+      {
+       "id": "command-compact",
+       "name": "@deepseek-ai/dsh-command-compact"
+      },
+      {
+       "id": "tool-result-pruner",
+       "name": "@deepseek-ai/dsh-compaction-tool-result-pruner",
+       "config": {
+        "thresholdChars": 8192,
+        "headChars": 4096,
+        "tailChars": 1024
+       }
+      }
+     ]
+    },
+    {
+     "id": "delegation",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "workflowEngine": true
+     },
+     "config": [
+      {
+       "id": "tool-subagent-control",
+       "name": "@deepseek-ai/dsh-tool-subagent-control"
+      },
+      {
+       "id": "tool-subagent-list-agents",
+       "name": "@deepseek-ai/dsh-tool-subagent-control/list-agents"
+      },
+      {
+       "id": "tool-subagent",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "config": {
+        "provider": "spawn",
+        "toolName": "subagent",
+        "modelSelectionSettings": true,
+        "backgroundMode": "continuable"
+       }
+      },
+      {
+       "id": "tool-subagent-fork",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "config": {
+        "provider": "fork",
+        "toolName": "subagent_fork",
+        "backgroundMode": "continuable"
+       }
+      },
+      {
+       "id": "tool-subagent-codex",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "disabled": true,
+       "config": {
+        "provider": "codex",
+        "toolName": "subagent_codex",
+        "backgroundMode": "one-shot",
+        "maxDepth": "provider-managed"
+       }
+      },
+      {
+       "id": "tool-subagent-claude-code",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "disabled": true,
+       "config": {
+        "provider": "claude-code",
+        "toolName": "subagent_claude_code",
+        "backgroundMode": "one-shot",
+        "maxDepth": "provider-managed"
+       }
+      },
+      {
+       "id": "workflow-ptc",
+       "name": "@deepseek-ai/dsh-workflow-ptc",
+       "config": {
+        "provider": "spawn"
+       }
+      },
+      {
+       "id": "tool-workflow",
+       "name": "@deepseek-ai/dsh-tool-workflow"
+      },
+      {
+       "id": "tool-ralph",
+       "name": "@deepseek-ai/dsh-tool-ralph",
+       "disabled": true,
+       "config": {
+        "subagentProvider": "spawn",
+        "maxRounds": 64
+       }
+      }
+     ]
+    },
+    {
+     "id": "tool-ask-user",
+     "name": "@deepseek-ai/dsh-tool-ask-user"
+    },
+    {
+     "id": "tool-todo",
+     "name": "@deepseek-ai/dsh-tool-todo",
+     "config": {
+      "allowParallelInProgress": true
+     }
+    },
+    {
+     "id": "tool-web",
+     "name": "@deepseek-ai/dsh-tool-web",
+     "config": {
+      "fetch": true,
+      "searchTimeoutMs": 60000
+     }
+    },
+    {
+     "id": "present",
+     "name": "@deepseek-ai/dsh-tool-present"
+    },
+    {
+     "id": "tool-plugin-manager",
+     "name": "@deepseek-ai/dsh-plugin-manager/tools",
+     "disabled": true
+    }
+   ]
+  },
+  "rationale": []
+ },
+ {
+  "id": "preset-ptc",
+  "name": "@deepseek-ai/dsh-agent-preset",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "preset:ptc",
+  "hasConfig": true,
+  "config": {
+   "id": "ptc",
+   "order": 2,
+   "plugins": [
+    {
+     "id": "persona",
+     "name": "@deepseek-ai/dsh-persona",
+     "config": {
+      "suffix": "Your working directory is {{cwd}}.",
+      "prefix": "You are a coding agent powered by the {{model}} model."
+     }
+    },
+    {
+     "id": "agent-instructions",
+     "name": "@deepseek-ai/dsh-agent-instructions",
+     "config": {
+      "maxBytes": 65536
+     }
+    },
+    {
+     "id": "tool-bash",
+     "name": "@deepseek-ai/dsh-tool-bash",
+     "disabled": "process.platform === 'win32'"
+    },
+    {
+     "id": "tool-pwsh",
+     "name": "@deepseek-ai/dsh-tool-pwsh",
+     "disabled": "process.platform !== 'win32'"
+    },
+    {
+     "id": "tool-fs",
+     "name": "@deepseek-ai/dsh-tool-fs"
+    },
+    {
+     "id": "tool-fs-search",
+     "name": "@deepseek-ai/dsh-tool-fs-search",
+     "config": {
+      "sampleOverCapGlobResults": false
+     }
+    },
+    {
+     "id": "tool-jobs",
+     "name": "@deepseek-ai/dsh-tool-jobs"
+    },
+    {
+     "id": "skill-filesystem",
+     "name": "@deepseek-ai/dsh-skill-filesystem"
+    },
+    {
+     "id": "tool-skill",
+     "name": "@deepseek-ai/dsh-tool-skill"
+    },
+    {
+     "id": "command-goal",
+     "name": "@deepseek-ai/dsh-command-goal"
+    },
+    {
+     "id": "tool-goal",
+     "name": "@deepseek-ai/dsh-tool-goal"
+    },
+    {
+     "id": "planning",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "planMode": true
+     },
+     "config": [
+      {
+       "id": "plan-mode",
+       "name": "@deepseek-ai/dsh-plan-mode",
+       "config": {
+        "section": "You are in plan mode. Stay in plan mode until exit_plan_mode succeeds or the user switches the session mode. Imperative language to implement changes means plan the implementation, not execute it. A user's conversational agreement — including an answer confirming something you asked — approves nothing and does not end plan mode; fold the confirmed decision into the plan and submit it through exit_plan_mode.\n\nExplore first. Use non-mutating reads, searches, static analysis, and checks to ground the plan in the actual repository. Do not edit or write files, change configuration, run formatters or code generation that rewrites tracked files, commit, or otherwise carry out the plan. Prefer existing functions and patterns over new machinery.\n\nThe tool catalog stays the same across modes for request-cache stability. These plan-mode rules override any later tool description or guidance that suggests using mutation tools; those tools remain listed to keep the tool catalog unchanged. Do not use todo_write to track this planning phase: it tracks implementation after an approved plan, while the plan itself belongs in exit_plan_mode.\n\nResolve discoverable facts by inspection. Use ask_user_question only for user-owned choices or material ambiguity that inspection cannot answer. Do not ask the user where code lives or how current behavior works when you can find out.\n\nMake the plan decision-complete: state the goal and success criteria; group implementation changes by subsystem; identify public API, schema, and data-flow changes; cover edge cases, failure modes, tests, acceptance criteria, and explicit assumptions. Keep it concise enough to review but detailed enough that another engineer can implement it without making design decisions.\n\nWhen ready, call exit_plan_mode with the complete plan markdown, starting with a # title. Make exit_plan_mode the only and final tool call in that assistant response: it presents the plan for approval, and implementation begins only in a later step after approval. Do not paste the final plan as a plain reply or ask \"should I proceed?\" through prose or ask_user_question. If review rejects it, incorporate the feedback and present again. If the review channel is unavailable or aborted, stay in plan mode and ask the user to switch modes manually; do not proceed with implementation.\n"
+       }
+      }
+     ]
+    },
+    {
+     "id": "compaction",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "compaction": true,
+      "toolResultPruner": true
+     },
+     "config": [
+      {
+       "id": "compaction-basic",
+       "name": "@deepseek-ai/dsh-compaction-basic"
+      },
+      {
+       "id": "command-compact",
+       "name": "@deepseek-ai/dsh-command-compact"
+      },
+      {
+       "id": "tool-result-pruner",
+       "name": "@deepseek-ai/dsh-compaction-tool-result-pruner",
+       "config": {
+        "thresholdChars": 8192,
+        "headChars": 4096,
+        "tailChars": 1024
+       }
+      }
+     ]
+    },
+    {
+     "id": "delegation",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "workflowEngine": true
+     },
+     "config": [
+      {
+       "id": "tool-subagent-control",
+       "name": "@deepseek-ai/dsh-tool-subagent-control"
+      },
+      {
+       "id": "tool-subagent-list-agents",
+       "name": "@deepseek-ai/dsh-tool-subagent-control/list-agents"
+      },
+      {
+       "id": "tool-subagent",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "config": {
+        "provider": "spawn",
+        "toolName": "subagent",
+        "modelSelectionSettings": true,
+        "backgroundMode": "continuable"
+       }
+      },
+      {
+       "id": "tool-subagent-fork",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "config": {
+        "provider": "fork",
+        "toolName": "subagent_fork",
+        "backgroundMode": "continuable"
+       }
+      },
+      {
+       "id": "tool-subagent-codex",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "disabled": true,
+       "config": {
+        "provider": "codex",
+        "toolName": "subagent_codex",
+        "backgroundMode": "one-shot",
+        "maxDepth": "provider-managed"
+       }
+      },
+      {
+       "id": "tool-subagent-claude-code",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "disabled": true,
+       "config": {
+        "provider": "claude-code",
+        "toolName": "subagent_claude_code",
+        "backgroundMode": "one-shot",
+        "maxDepth": "provider-managed"
+       }
+      },
+      {
+       "id": "workflow-ptc",
+       "name": "@deepseek-ai/dsh-workflow-ptc",
+       "disabled": true,
+       "config": {
+        "provider": "spawn"
+       }
+      },
+      {
+       "id": "tool-workflow",
+       "name": "@deepseek-ai/dsh-tool-workflow",
+       "disabled": true
+      },
+      {
+       "id": "tool-ralph",
+       "name": "@deepseek-ai/dsh-tool-ralph",
+       "disabled": true,
+       "config": {
+        "subagentProvider": "spawn",
+        "maxRounds": 64
+       }
+      }
+     ]
+    },
+    {
+     "id": "tool-ask-user",
+     "name": "@deepseek-ai/dsh-tool-ask-user"
+    },
+    {
+     "id": "tool-todo",
+     "name": "@deepseek-ai/dsh-tool-todo",
+     "config": {
+      "allowParallelInProgress": true
+     }
+    },
+    {
+     "id": "tool-web",
+     "name": "@deepseek-ai/dsh-tool-web",
+     "config": {
+      "fetch": true,
+      "searchTimeoutMs": 60000
+     }
+    },
+    {
+     "id": "tool-presentation",
+     "name": "@deepseek-ai/dsh-agent-tool-presentation",
+     "config": {
+      "mode": "ptc"
+     }
+    },
+    {
+     "id": "present",
+     "name": "@deepseek-ai/dsh-tool-present"
+    },
+    {
+     "id": "tool-plugin-manager",
+     "name": "@deepseek-ai/dsh-plugin-manager/tools",
+     "disabled": true
+    }
+   ]
+  },
+  "rationale": []
+ },
+ {
+  "id": "preset-minimal",
+  "name": "@deepseek-ai/dsh-agent-preset",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "preset:minimal",
+  "hasConfig": true,
+  "config": {
+   "id": "minimal",
+   "order": 3,
+   "plugins": [
+    {
+     "id": "persona",
+     "name": "@deepseek-ai/dsh-persona",
+     "config": {
+      "prefix": "You are a helpful software engineer assistant.",
+      "complete": true,
+      "includeRuntimeContext": false
+     }
+    },
+    {
+     "id": "persistent-shell",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "terminals": true
+     },
+     "config": [
+      {
+       "id": "pty",
+       "name": "@deepseek-ai/dsh-terminal"
+      },
+      {
+       "id": "terminal-bash",
+       "name": "@deepseek-ai/dsh-terminal-bash",
+       "disabled": "process.platform === 'win32'",
+       "config": {
+        "timeoutMs": 300000
+       }
+      },
+      {
+       "id": "persistent-bash",
+       "name": "@deepseek-ai/dsh-tool-bash-persistent",
+       "disabled": "process.platform === 'win32'",
+       "config": {
+        "timeoutMs": 300000,
+        "description": "Run commands in a bash shell\n* When invoking this tool, the contents of the \"command\" parameter does NOT need to be XML-escaped.\n* Network access depends on the task environment. Prefer configured mirrors/proxies when they are available.\n* State is persistent across command calls and discussions with the user.\n* To inspect a particular line range of a file, e.g. lines 10-25, try 'sed -n 10,25p /path/to/the/file'.\n* Please avoid commands that may produce a very large amount of output.\n* Please run long lived commands in the background, e.g. 'sleep 10 &' or start a server in the background."
+       }
+      },
+      {
+       "id": "terminal-pwsh",
+       "name": "@deepseek-ai/dsh-terminal-bash",
+       "disabled": "process.platform !== 'win32'",
+       "config": {
+        "shellDialect": "pwsh",
+        "timeoutMs": 300000
+       }
+      },
+      {
+       "id": "persistent-pwsh",
+       "name": "@deepseek-ai/dsh-tool-pwsh-persistent",
+       "disabled": "process.platform !== 'win32'",
+       "config": {
+        "timeoutMs": 300000,
+        "description": "Run commands in a PowerShell shell\n* When invoking this tool, the contents of the \"command\" parameter does NOT need to be XML-escaped.\n* You don't have access to the internet via this tool.\n* State is persistent across command calls and discussions with the user.\n* Use native Windows paths (C:\\...) and $env:NAME variables; this is PowerShell, not bash.\n* Please avoid commands that may produce a very large amount of output.\n* Please run long lived commands in the background, e.g. 'Start-Job' or start a server with Start-Process."
+       }
+      }
+     ]
+    }
+   ]
+  },
+  "rationale": []
+ },
+ {
+  "id": "preset-cordis",
+  "name": "@deepseek-ai/dsh-agent-preset",
+  "state": "enabled",
+  "disabledExpr": "",
+  "layer": "preset:cordis",
+  "hasConfig": true,
+  "config": {
+   "id": "cordis",
+   "order": 4,
+   "plugins": [
+    {
+     "id": "persona",
+     "name": "@deepseek-ai/dsh-persona",
+     "config": {
+      "suffix": "Your working directory is {{cwd}}.",
+      "prefix": "You are a coding agent powered by the {{model}} model."
+     }
+    },
+    {
+     "id": "agent-instructions",
+     "name": "@deepseek-ai/dsh-agent-instructions",
+     "config": {
+      "maxBytes": 65536
+     }
+    },
+    {
+     "id": "tool-bash",
+     "name": "@deepseek-ai/dsh-tool-bash",
+     "disabled": "process.platform === 'win32'"
+    },
+    {
+     "id": "tool-pwsh",
+     "name": "@deepseek-ai/dsh-tool-pwsh",
+     "disabled": "process.platform !== 'win32'"
+    },
+    {
+     "id": "tool-fs",
+     "name": "@deepseek-ai/dsh-tool-fs"
+    },
+    {
+     "id": "tool-fs-search",
+     "name": "@deepseek-ai/dsh-tool-fs-search",
+     "config": {
+      "sampleOverCapGlobResults": false
+     }
+    },
+    {
+     "id": "tool-jobs",
+     "name": "@deepseek-ai/dsh-tool-jobs"
+    },
+    {
+     "id": "command-goal",
+     "name": "@deepseek-ai/dsh-command-goal"
+    },
+    {
+     "id": "tool-goal",
+     "name": "@deepseek-ai/dsh-tool-goal"
+    },
+    {
+     "id": "planning",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "planMode": true
+     },
+     "config": [
+      {
+       "id": "plan-mode",
+       "name": "@deepseek-ai/dsh-plan-mode",
+       "config": {
+        "section": "You are in plan mode. Stay in plan mode until exit_plan_mode succeeds or the user switches the session mode. Imperative language to implement changes means plan the implementation, not execute it. A user's conversational agreement — including an answer confirming something you asked — approves nothing and does not end plan mode; fold the confirmed decision into the plan and submit it through exit_plan_mode.\n\nExplore first. Use non-mutating reads, searches, static analysis, and checks to ground the plan in the actual repository. Do not edit or write files, change configuration, run formatters or code generation that rewrites tracked files, commit, or otherwise carry out the plan. Prefer existing functions and patterns over new machinery.\n\nThe tool catalog stays the same across modes for request-cache stability. These plan-mode rules override any later tool description or guidance that suggests using mutation tools; those tools remain listed to keep the tool catalog unchanged. Do not use todo_write to track this planning phase: it tracks implementation after an approved plan, while the plan itself belongs in exit_plan_mode.\n\nResolve discoverable facts by inspection. Use ask_user_question only for user-owned choices or material ambiguity that inspection cannot answer. Do not ask the user where code lives or how current behavior works when you can find out.\n\nMake the plan decision-complete: state the goal and success criteria; group implementation changes by subsystem; identify public API, schema, and data-flow changes; cover edge cases, failure modes, tests, acceptance criteria, and explicit assumptions. Keep it concise enough to review but detailed enough that another engineer can implement it without making design decisions.\n\nWhen ready, call exit_plan_mode with the complete plan markdown, starting with a # title. Make exit_plan_mode the only and final tool call in that assistant response: it presents the plan for approval, and implementation begins only in a later step after approval. Do not paste the final plan as a plain reply or ask \"should I proceed?\" through prose or ask_user_question. If review rejects it, incorporate the feedback and present again. If the review channel is unavailable or aborted, stay in plan mode and ask the user to switch modes manually; do not proceed with implementation.\n"
+       }
+      }
+     ]
+    },
+    {
+     "id": "compaction",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "compaction": true,
+      "toolResultPruner": true
+     },
+     "config": [
+      {
+       "id": "compaction-basic",
+       "name": "@deepseek-ai/dsh-compaction-basic"
+      },
+      {
+       "id": "command-compact",
+       "name": "@deepseek-ai/dsh-command-compact"
+      },
+      {
+       "id": "tool-result-pruner",
+       "name": "@deepseek-ai/dsh-compaction-tool-result-pruner",
+       "config": {
+        "thresholdChars": 8192,
+        "headChars": 4096,
+        "tailChars": 1024
+       }
+      }
+     ]
+    },
+    {
+     "id": "delegation",
+     "name": "cordis:group",
+     "group": true,
+     "isolate": {
+      "workflowEngine": true
+     },
+     "config": [
+      {
+       "id": "tool-subagent-control",
+       "name": "@deepseek-ai/dsh-tool-subagent-control"
+      },
+      {
+       "id": "tool-subagent-list-agents",
+       "name": "@deepseek-ai/dsh-tool-subagent-control/list-agents"
+      },
+      {
+       "id": "tool-subagent",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "config": {
+        "provider": "spawn",
+        "toolName": "subagent",
+        "modelSelectionSettings": true,
+        "backgroundMode": "continuable"
+       }
+      },
+      {
+       "id": "tool-subagent-fork",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "config": {
+        "provider": "fork",
+        "toolName": "subagent_fork",
+        "backgroundMode": "continuable"
+       }
+      },
+      {
+       "id": "tool-subagent-codex",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "disabled": true,
+       "config": {
+        "provider": "codex",
+        "toolName": "subagent_codex",
+        "backgroundMode": "one-shot",
+        "maxDepth": "provider-managed"
+       }
+      },
+      {
+       "id": "tool-subagent-claude-code",
+       "name": "@deepseek-ai/dsh-tool-subagent",
+       "disabled": true,
+       "config": {
+        "provider": "claude-code",
+        "toolName": "subagent_claude_code",
+        "backgroundMode": "one-shot",
+        "maxDepth": "provider-managed"
+       }
+      },
+      {
+       "id": "workflow-ptc",
+       "name": "@deepseek-ai/dsh-workflow-ptc",
+       "config": {
+        "provider": "spawn"
+       }
+      },
+      {
+       "id": "tool-workflow",
+       "name": "@deepseek-ai/dsh-tool-workflow"
+      },
+      {
+       "id": "tool-ralph",
+       "name": "@deepseek-ai/dsh-tool-ralph",
+       "disabled": true,
+       "config": {
+        "subagentProvider": "spawn",
+        "maxRounds": 64
+       }
+      }
+     ]
+    },
+    {
+     "id": "tool-ask-user",
+     "name": "@deepseek-ai/dsh-tool-ask-user"
+    },
+    {
+     "id": "tool-todo",
+     "name": "@deepseek-ai/dsh-tool-todo",
+     "config": {
+      "allowParallelInProgress": true
+     }
+    },
+    {
+     "id": "tool-web",
+     "name": "@deepseek-ai/dsh-tool-web",
+     "config": {
+      "fetch": true,
+      "searchTimeoutMs": 60000
+     }
+    },
+    {
+     "id": "tool-cordis",
+     "name": "@deepseek-ai/dsh-tool-cordis"
+    },
+    {
+     "id": "skill-filesystem",
+     "name": "@deepseek-ai/dsh-skill-filesystem",
+     "config": {
+      "customSkillDirs": [
+       "process.getBuiltinModule('node:path').join(process.getBuiltinModule('node:path').dirname(process.getBuiltinModule('node:module').createRequire(baseUrl).resolve('@deepseek-ai/dsh-agent-preset/package.json')), 'skills')"
+      ]
+     }
+    },
+    {
+     "id": "tool-skill",
+     "name": "@deepseek-ai/dsh-tool-skill"
+    },
+    {
+     "id": "present",
+     "name": "@deepseek-ai/dsh-tool-present"
+    },
+    {
+     "id": "tool-plugin-manager",
+     "name": "@deepseek-ai/dsh-plugin-manager/tools",
+     "disabled": "!ctx.get('profileContext')"
+    }
+   ]
+  },
+  "rationale": []
+ }
+]

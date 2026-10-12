@@ -1,0 +1,122 @@
+{
+ "build": {
+  "product": "DeepSeek Harness desktop",
+  "version": "4.0.4",
+  "platform": "win32 x64 (Electron)",
+  "profile": "desktop",
+  "framework": "Cordis ~4.0.4 + cordis-plugin-loader ~1.0.5",
+  "bundles": [
+   "@deepseek-ai/dsh-base",
+   "@deepseek-ai/dsh-web-app"
+  ]
+ },
+ "counts": {
+  "packagesTotal": 287,
+  "pluginPackages": 215,
+  "libraries": 72,
+  "withReadme": 285,
+  "hostRows": 183,
+  "enabled": 149,
+  "disabled": 25,
+  "conditional": 9,
+  "mounted": 175,
+  "enabledPackages": 154,
+  "presets": 4,
+  "presetRows": 95,
+  "documentedBytes": 2906822
+ },
+ "groupCounts": {
+  "internal library": 69,
+  "acp": 1,
+  "bundle": 4,
+  "core": 7,
+  "context": 5,
+  "preset": 3,
+  "api": 9,
+  "attachment": 1,
+  "credentials": 3,
+  "shell": 9,
+  "client": 58,
+  "extensions": 4,
+  "compaction": 4,
+  "feedback": 2,
+  "goal": 4,
+  "interaction": 5,
+  "boot": 3,
+  "llm": 8,
+  "experimental": 11,
+  "fs": 6,
+  "hooks": 2,
+  "host": 8,
+  "runtime-diagnostics": 1,
+  "jobs": 2,
+  "mcp": 2,
+  "document": 1,
+  "telemetry": 1,
+  "plan": 1,
+  "ptc-runtime": 1,
+  "guard": 2,
+  "sandbox": 2,
+  "schedule": 1,
+  "sdk": 1,
+  "session": 10,
+  "session-query": 2,
+  "settings": 1,
+  "skill": 6,
+  "spill": 2,
+  "storage": 3,
+  "subagent": 5,
+  "subprocess": 1,
+  "terminal": 2,
+  "deliverables": 2,
+  "workflow": 3,
+  "todo": 1,
+  "web": 4,
+  "typert": 1,
+  "webhook": 2,
+  "workspace": 1
+ },
+ "rowStates": {
+  "disabled": 25,
+  "conditional (!!js)": 9,
+  "enabled": 149
+ },
+ "layerFiles": [
+  {
+   "layer": "dsh-base",
+   "rel": "dsh-base/cordis.patch.yml",
+   "bytes": 20780
+  },
+  {
+   "layer": "dsh-web-app",
+   "rel": "dsh-web-app/cordis.patch.yml",
+   "bytes": 21637
+  },
+  {
+   "layer": "preset:standard",
+   "rel": "dsh-web-app/presets/standard.patch.yml",
+   "bytes": 7511
+  },
+  {
+   "layer": "preset:ptc",
+   "rel": "dsh-web-app/presets/ptc.patch.yml",
+   "bytes": 7697
+  },
+  {
+   "layer": "preset:minimal",
+   "rel": "dsh-web-app/presets/minimal.patch.yml",
+   "bytes": 3184
+  },
+  {
+   "layer": "preset:cordis",
+   "rel": "dsh-web-app/presets/cordis.patch.yml",
+   "bytes": 8089
+  }
+ ],
+ "readmeKinds": {
+  "not documented": 10,
+  "package-reference": 230,
+  "package-bundle": 10,
+  "package-library": 37
+ }
+}
