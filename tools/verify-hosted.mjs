@@ -20,16 +20,26 @@ const rootRes = await get('/');
 const html = await rootRes.text();
 check('root serves the app shell', rootRes.ok && html.includes('id="root"'), `HTTP ${rootRes.status}`);
 
-// The shell names its own hashed assets; follow them rather than guessing.
-const jsPath = html.match(/src="\.\/(assets\/[^"]+)"/)?.[1];
-const cssPath = html.match(/href="\.\/(assets\/[^"]+)"/)?.[1];
+// The shell names its own hashed assets. Parse them without assuming a leading
+// "./" or "/", so this works for a relative or an absolute base, and resolve
+// them the way a browser would from the page that served them.
+const assetRef = (markup, ext) => {
+  for (const m of markup.matchAll(/(?:src|href)="([^"]+)"/g)) {
+    if (m[1].endsWith(ext)) return m[1];
+  }
+  return undefined;
+};
+const resolveFrom = (ref, pagePath = '/') => new URL(ref, base + pagePath).href;
+
+const jsPath = assetRef(html, '.js');
+const cssPath = assetRef(html, '.css');
 check('shell references hashed assets', !!jsPath && !!cssPath, `${jsPath ?? '?'} / ${cssPath ?? '?'}`);
 
-const jsRes = await get('/' + jsPath);
+const jsRes = await fetch(resolveFrom(jsPath));
 const js = await jsRes.text();
 check('main bundle is served', jsRes.ok && js.length > 500_000, `${(js.length / 1024).toFixed(0)} KB`);
 
-const cssRes = await get('/' + cssPath);
+const cssRes = await fetch(resolveFrom(cssPath));
 const css = await cssRes.text();
 check('stylesheet is served with Harness tokens',
   cssRes.ok && css.includes('--dsw-alias-bg-base') && css.includes('data-ds-dark-theme'));
@@ -54,6 +64,34 @@ check('responses are compressed', !!encoding, encoding || 'none reported');
 const deep = await get('/plugins/dsh-tool-web');
 const deepBody = await deep.text();
 check('a path deep link falls back to the shell', deep.ok && deepBody.includes('id="root"'), `HTTP ${deep.status}`);
+
+// Returning the shell is not enough: the shell's own asset references must
+// resolve to JavaScript *from that path*. With a relative base they resolve
+// under /plugins/, the rewrite answers with HTML, the browser refuses the module
+// script, and the visitor gets a blank page. Check the real thing.
+const deepJs = deepBody.match(/src="([^"]+\.js)"/)?.[1];
+check('the deep-link shell references a script', !!deepJs, deepJs || 'none found');
+if (deepJs) {
+  const resolved = new URL(deepJs, base + '/plugins/dsh-tool-web').href;
+  const assetRes = await fetch(resolved);
+  const assetBody = await assetRes.text();
+  const isHtml = /^\s*<!doctype html|^\s*<html/i.test(assetBody);
+  check('a deep-path visit loads real JavaScript, not the HTML shell',
+    assetRes.ok && !isHtml,
+    `${resolved} -> ${assetRes.headers.get('content-type')}${isHtml ? ' (would render blank)' : ''}`);
+}
+
+// The same must hold for any other path a visitor might type.
+const oddRes = await get('/some/other/deep/path');
+const oddBody = await oddRes.text();
+const oddJs = oddBody.match(/src="([^"]+\.js)"/)?.[1];
+if (oddJs) {
+  const resolved = new URL(oddJs, base + '/some/other/deep/path').href;
+  const res = await fetch(resolved);
+  const body = await res.text();
+  check('an arbitrary path also loads real JavaScript',
+    res.ok && !/^\s*<!doctype html|^\s*<html/i.test(body), resolved);
+}
 
 const routing = html.includes('data-ds-dark-theme');
 check('the pre-paint theme script survived the deploy', routing);

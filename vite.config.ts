@@ -3,7 +3,11 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: './',
+  // Absolute, not './'. A relative base breaks every real path: at /plugins/x the
+  // browser resolves "./assets/index.js" against /plugins/, the SPA rewrite answers
+  // that with index.html, and the module script is refused for being HTML — a blank
+  // page. Absolute paths resolve identically from any URL.
+  base: '/',
   build: {
     outDir: 'dist',
     // The catalogue bundles ~2.8 MB of first-party plugin documentation, so the

@@ -12,16 +12,24 @@ const html = await (await fetch(`${base}/`)).text();
 check('GET / serves the shell', html.includes('id="root"'));
 check('shell references hashed assets', /assets\/index-[\w-]+\.js/.test(html));
 check('shell applies the stored theme before paint', html.includes('data-ds-dark-theme'));
-check('assets use relative paths (file:// safe)', html.includes('src="./assets/'));
+// Asset paths must be absolute. A relative base breaks every real path: at
+// /plugins/x the browser resolves "./assets/x.js" under /plugins/, an SPA rewrite
+// answers with HTML, and the module script is refused — a blank page.
+check('assets use absolute paths (required for deep links)', /(?:src|href)="\/assets\//.test(html));
+check('asset paths are not relative', !/(?:src|href)="\.\/assets\//.test(html));
 
-const js = html.match(/src="\.\/(assets\/[^"]+)"/)?.[1];
-const css = html.match(/href="\.\/(assets\/[^"]+)"/)?.[1];
+const js = html.match(/(?:src)="(\/?assets\/[^"]+)"/)?.[1];
+const css = html.match(/(?:href)="(\/?assets\/[^"]+)"/)?.[1];
 
-const jsRes = await fetch(`${base}/${js}`);
+// Resolve exactly as a browser would, so an absolute or relative base both work
+// and a leading slash never becomes a double slash.
+const url = (ref) => new URL(ref, `${base}/`).href;
+
+const jsRes = await fetch(url(js));
 const jsBody = await jsRes.text();
 check('main bundle loads', jsRes.ok && jsBody.length > 100000, `${(jsBody.length / 1024).toFixed(0)} KB`);
 
-const cssRes = await fetch(`${base}/${css}`);
+const cssRes = await fetch(url(css));
 const cssBody = await cssRes.text();
 check('stylesheet loads', cssRes.ok && cssBody.length > 10000, `${(cssBody.length / 1024).toFixed(0)} KB`);
 check('stylesheet carries the Harness tokens', cssBody.includes('--dsw-alias-bg-base') && cssBody.includes('data-ds-dark-theme'));
@@ -36,7 +44,7 @@ check('bundle carries row configs', jsBody.includes('session-query-sqlite'));
 const chunk = jsBody.match(/(dsh-tool-web-[\w-]+\.js)/)?.[1];
 check('readme chunks are referenced separately', !!chunk, chunk || 'not found');
 if (chunk) {
-  const chunkRes = await fetch(`${base}/assets/${chunk}`);
+  const chunkRes = await fetch(url(`assets/${chunk}`));
   const chunkBody = await chunkRes.text();
   check('a documentation chunk loads', chunkRes.ok && chunkBody.length > 1000, `${(chunkBody.length / 1024).toFixed(1)} KB`);
   check('chunk contains real documentation text', /web_search/.test(chunkBody));

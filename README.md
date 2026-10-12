@@ -79,9 +79,13 @@ npm run build      # -> dist/
 npm run preview    # serve it
 ```
 
-`dist/` uses relative asset paths so it works from any sub-path, but serve it over HTTP — opening
-`dist/index.html` from the filesystem fails, because browsers block ES modules over `file://`. With no
-dependencies installed you can still preview a build:
+`dist/` uses **absolute** asset paths (`/assets/…`). That is deliberate: with a relative base, a visit
+to a real path such as `/plugins/dsh-tool-fs` would resolve `./assets/index.js` under `/plugins/`, the
+SPA rewrite would answer that with `index.html`, and the browser would refuse the module script for
+being HTML — a blank page. Absolute paths resolve identically from every URL.
+
+Serve the build over HTTP — opening `dist/index.html` from the filesystem does not work, because
+browsers block ES modules over `file://`. With no dependencies installed you can still preview a build:
 
 ```bash
 node tools/serve-dist.mjs 4173    # then open http://127.0.0.1:4173/
