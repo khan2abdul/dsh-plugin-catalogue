@@ -1,180 +1,186 @@
 # DeepSeek Harness — Plugin Catalogue
 
-A browsable reference for **every plugin, bundle and session setup** in the DeepSeek Harness desktop
-build — written so that someone who has never seen the inside of this software can still understand
-what each part does, whether they need to care, and what it costs them.
+**Every part of DeepSeek Harness, explained in plain English.**
 
-Everything on the site is derived from the shipped `app.asar` payload: each package's own
-documentation, the settings lines the profile actually composes, the live configuration, the notes
-the engineers wrote beside each line, and the plugin-authoring skills the harness ships for its own
-agents. Nothing is summarised from memory.
+DeepSeek Harness is built out of **287 small parts** — one searches the web, one reads your files,
+one keeps a long goal on track, one draws the sidebar. The app ships a reference for each of them,
+but it is written for the engineers who build the harness. It will tell you that something is a
+*"sandbox-consuming implementation of the PowerShell executor seam"* and leave you none the wiser.
 
----
+This project turns that into a browsable catalogue that answers three questions about every single
+part:
 
-## Quick start
+1. **What does it do?**
+2. **Should I care — and when would I actually use it?**
+3. **What is it called?**
+
+## At a glance
+
+| | |
+|---|---|
+| Parts documented | **287** (215 usable plugins + 72 internal building blocks) |
+| Working in your setup | **152** |
+| Installed, can be switched on | **21** |
+| Not included in this build | **42** |
+| Source documentation read | **285 package references**, 2.8 MB |
+| Sample setups explained | **4** session presets, 29 / 30 / 6 / 30 tools |
+
+## What makes it different from a package list
+
+**It leads with people, not plumbing.** Open any plugin and you get what it does, why you would care,
+when to use it, when to skip it, its good points and the things to know — followed by how much effort
+it takes and who it is for.
+
+**The names stay visible.** Every entry shows its real name (`dsh-tool-fs-search`) next to the plain
+explanation, so you can find it again in settings or in a search box.
+
+**The states are computed, not written.** "Working now", "Installed, switched off", "Not in this
+version" and "Internal part" are derived from the settings lines the app actually composes — the same
+source the *Under the hood* page shows. They cannot drift from reality.
+
+**Nothing is invented.** See [Where the information comes from](#where-the-information-comes-from).
+
+**Engineering detail survives.** Every plugin page keeps the original reference, the exact settings
+line, its configuration and the note the engineers wrote beside it — behind a **Technical details**
+toggle on the same page.
+
+## What you will find
+
+| View | What it answers |
+|---|---|
+| **Start here** | What you have, what each thing is called, and which group it falls into — grouped by install state |
+| **All plugins** | The full list, useful parts first, with status, audience and effort on every row |
+| **A plugin page** | What it does → why you'd care → good things / things to know → use it when / skip it when → effort → technical details |
+| **Words explained** | A glossary of every technical term the site uses, in 24 plain definitions |
+| **Session setups** | Why two chats behave differently: the four tool sets, named in plain English |
+| **Under the hood** | The raw composed settings lines with their rationale — explicitly skippable |
+| **Build your own** | The harness's own plugin-development guides, verbatim, marked for developers |
+
+## Run it
 
 ```bash
+git clone https://github.com/khan2abdul/dsh-plugin-catalogue.git
+cd dsh-plugin-catalogue
 npm install
-npm run dev        # dev server, http://localhost:5273
-npm run build      # tsc --noEmit && vite build  ->  dist/
-npm run preview    # serve the production build (vite preview)
+npm run dev
 ```
 
-`dist/` uses relative asset paths, so it works from any sub-path on a static host — but serve it over
-HTTP. Opening `dist/index.html` straight from the filesystem does **not** work: Chrome blocks
-`<script type="module">` over `file://` with a CORS error. With no dependencies installed you can
-still preview a build using the bundled server:
+Then open **http://localhost:5273**.
+
+To produce a static build instead:
+
+```bash
+npm run build      # -> dist/
+npm run preview    # serve it
+```
+
+`dist/` uses relative asset paths so it works from any sub-path, but serve it over HTTP — opening
+`dist/index.html` from the filesystem fails, because browsers block ES modules over `file://`. With no
+dependencies installed you can still preview a build:
 
 ```bash
 node tools/serve-dist.mjs 4173    # then open http://127.0.0.1:4173/
 ```
 
-> **Windows note — use npm, not pnpm.** Without symlink privilege pnpm falls back to Windows
-> *junctions* for `node_modules` entries. Node's ESM resolver does not realpath a junction, so Vite's
-> own transitive dependency (`vite` → `rolldown`) is not found and the config fails to load with
-> `ERR_MODULE_NOT_FOUND`. npm produces a flat tree of real directories and resolves correctly.
-> `pnpm-lock.yaml` is therefore not committed; `package-lock.json` is.
+> **Windows: use npm, not pnpm.** Without symlink privilege pnpm falls back to Windows *junctions* for
+> `node_modules` entries. Node's ESM resolver does not resolve a junction to its real path, so Vite
+> cannot find its own dependency and the build fails with `ERR_MODULE_NOT_FOUND`. npm produces a flat
+> tree of real directories and works.
 
-## Two layers, on purpose
+## Where the information comes from
 
-The catalogue exists for two different readers, and the same page serves both:
+Nothing here was written from memory, and nothing was summarised from a blog post. Every explanation,
+option and stated drawback was read out of the **installed application payload** (`app.asar`):
+each package's own documentation, the settings lines the `desktop` profile actually composes, the live
+configuration, and the notes the engineers wrote beside each line.
 
-| Layer | For | Where it lives |
-|---|---|---|
-| **Plain language** — what it does, why you'd care, when to use it or skip it, good things, things to know, and how much effort it takes | anyone | leads every plugin page and every list row |
-| **Technical detail** — the package name, the exact settings line, its configuration, the shipped rationale, and the makers' original reference | engineers | behind a **Technical details** disclosure on the same page |
+The plain-language entries are generated under one hard rule:
 
-A reader never has to open the technical half, and an engineer never loses the evidence behind the
-plain half.
+> Derive drawbacks **only** from the package's own stated limitations. If the authors documented no
+> downside, write *"No documented limitations."* — never invent one.
 
-## What the site contains
+Across all 215 plugins, **not one entry needed that placeholder**: every single drawback traces back to
+a limitation the DeepSeek engineers documented themselves. Pros are grounded the same way. The
+generation pipeline, its grounding rule and its validation gates are described in
+[How the data is built](#how-the-data-is-built).
 
-| View | What it shows |
-|---|---|
-| **Start here** | What a plugin is, how many you can safely ignore, which are worth a look, how a setup is built up in layers, what is off by default and why, and the four session setups |
-| **All plugins** | Every part, best-for-you first and internal plumbing last. Each row shows a plain headline, a one-line explanation, its status, who it is for, and what it takes to use it |
-| **Plugin detail** | What it does → why you'd care → good things and things to know side by side → use it when / skip it when → what it takes. Then Technical details: the settings line, its configuration, the engineers' own note, and the full original reference |
-| **Words explained** | A glossary of every technical term the site uses — plugin, profile, row, patch, sandbox, approval, preset, subagent, `!!js`, `app.asar` … |
-| **Session setups** | Why two chats behave differently: the four setups, with their tools named in plain English and grouped |
-| **Under the hood** | The raw list of composed settings lines, in order, with configuration and rationale. Explicitly marked as skippable for non-engineers |
-| **Build your own** | The harness's own plugin-development skills, verbatim, behind a clear "this is for developers" warning |
+## How it's built
 
-Dark mode is the Harness mechanism, not a re-implementation: the toggle sets `data-ds-dark-theme` on
-`<body>`, the exact selector the shipped design tokens key their dark values on.
-
-## How the plain-language layer was written
-
-This is the part worth trusting carefully, so the method matters:
-
-1. **Digest per package.** For each of the 287 packages the pipeline extracts only decision-relevant
-   material from its own documentation: the authors' summary, their "when to choose it" guidance,
-   their stated limitations, the live settings line and configuration, and the shipped rationale.
-   Nothing else.
-2. **Fan-out writing.** Each digest batch is handed to a writer that must produce a fixed JSON shape
-   (headline, what it does, why you'd care, use-when, skip-when, pros, cons, effort, best-for,
-   one-liner).
-3. **The grounding rule.** Writers are instructed to derive **cons only from the package's stated
-   limitations**, and — where the authors documented no downside — to write exactly
-   *"No documented limitations."* rather than invent one. Pros must be grounded in what the digest
-   says the package enables.
-4. **Validation before shipping.** `tools/merge-plain.cjs` re-checks every field: presence, type,
-   length caps, enum membership, and one entry per package in order. A bad batch is reported, not
-   silently published.
-
-Internal building blocks (72 of the 287) get an honest one-liner instead of invented trade-offs,
-because a reader cannot switch them on or off — "nothing here for you to configure" is the truthful
-answer.
-
-## Data provenance
-
-Generated from `app.asar` of the installed **DeepSeek Harness desktop 0.2.0-rc.2** (Windows x64):
-
-| Fact | Value |
-|---|---|
-| Packages under `@deepseek-ai/` | 287 (215 export a Cordis plugin, 72 are internal libraries) |
-| Composed host-plane rows | 183 (149 enabled, 25 disabled, 9 conditional) |
-| Packages mounted by a host row | 175 |
-| Agent presets | 4 → 29 / 30 / 6 / 30 plugin rows |
-| Original documentation | 285 package references, 2.8 MB, 205 of them with tables |
-| Patch rationale captured | 73 of 183 rows |
-
-`src/data/` holds the generated dataset:
-
-- `plugins.json` — one record per package: metadata, mount facts, and the `plain` entry
-- `readmes/<package>.md` — 285 lazily-loaded documentation chunks
-- `host-rows.json`, `presets.json`, `guides.json`, `stats.json`
-
-## Regenerating the data
-
-The generators live with the extraction toolkit that produced them and expect that toolkit's outputs
-as siblings (`dsh-plugins/`, `extracted/`). From that parent directory:
-
-```bash
-node dsh-plugin-catalogue/tools/build-data.cjs      # dataset from the extracted payload
-node dsh-plugin-catalogue/tools/build-digests.cjs   # per-package digests + batches for writers
-#   … writers produce .work/plain/<batch>.json …
-node dsh-plugin-catalogue/tools/merge-plain.cjs     # validate + attach the plain layer
-```
-
-See the toolkit's `asar.js` (a dependency-free ASAR reader), `compose.js` (resolves the patch layers
-into the final row set) and `report.js` (generates the Markdown catalogues).
-
-## Verification
-
-```bash
-node tools/smoke.mjs        # dataset + markdown pipeline, no browser needed
-node tools/serve-dist.mjs   # serve dist/ on :4173
-node tools/verify-dist.mjs http://127.0.0.1:4173   # HTTP checks against the built site
-node tools/verify-dev.mjs   http://localhost:5273  # checks against the running dev server
-```
-
-`smoke.mjs` asserts the dataset invariants (287 / 183 / 29-30-6-30), that all 285 documents render to
-HTML through the deployed markdown pipeline, and that row states and rationale coverage match the
-source. `verify-dist.mjs` asserts the built artifact serves its shell, stylesheet, main bundle and
-lazily-loaded documentation chunks. `merge-plain.cjs` asserts the shape and coverage of the
-plain-language layer.
-
-## Layout
+- **Vite + React + TypeScript.** No component library — every control is built by hand from the
+  Harness design tokens, so the site matches the real client rather than approximating it.
+- **The real Harness design language.** Five stylesheets are copied verbatim from the shipped
+  `dsh-client-ui-theme` package: 101 semantic design tokens plus 76 palette values, for light and dark.
+  Dark mode is toggled exactly as the Harness Web client does it — `data-ds-dark-theme` on `<body>`.
+- **The dataset is generated, not typed.** 287 package records, 183 composed settings lines, the four
+  expanded presets, and 285 documentation chunks that load lazily per plugin page.
 
 ```
 src/
-  main.tsx              entry; imports the real Harness stylesheets, then the site styles
   App.tsx               shell, routing, shared filter state
-  components/           Sidebar, Badge, Markdown, ThemeToggle
+  components/           Sidebar, Badge, Markdown renderer, theme toggle
   lib/                  data access + search, markdown pipeline, tiny hash router, types
   pages/                Dashboard, Plugins, PluginDetail, Glossary, Presets, Composition, Guides
-  styles/
-    dsh/                the shipped Harness stylesheets, verbatim
-    site.css            the catalogue UI, expressed entirely in Harness tokens
-    site-plain.css      components added for the plain-language layer
-  data/                 generated dataset
+  styles/dsh/           the shipped Harness stylesheets, verbatim
+  styles/site*.css      the catalogue UI, expressed entirely in Harness tokens
+  data/                 the generated dataset (287 records + 285 documentation chunks)
 tools/
-  build-data.cjs        dataset from the extracted payload
+  build-data.cjs        builds the dataset from the extracted payload
   build-digests.cjs     per-package digests and writer batches
-  merge-plain.cjs       validates and attaches the plain-language layer
-  smoke.mjs             dataset + markdown smoke test
-  serve-dist.mjs        dependency-free static server for dist/
-  verify-dist.mjs       HTTP verification of the built site
-  verify-dev.mjs        checks against the running dev server
+  merge-plain.cjs       validates and merges the plain-language layer
+  check-plain.cjs       coverage and jargon audit
+  smoke.mjs             dataset, markdown and state invariants
+  serve-dist.mjs        dependency-free static server
+  verify-dist.mjs       HTTP checks against a built site
+  verify-dev.mjs        checks against a running dev server
 ```
 
-## Notes and limitations
+## Checking it
 
-- **Documentation is rendered as trusted first-party HTML.** Content comes from the harness's own
-  shipped packages; it is not sanitized, because it is not third-party input. If you point this
-  pipeline at untrusted packages, add a sanitizer before `dangerouslySetInnerHTML`.
-- **Rationale notes are copied verbatim**, including one case where the shipped patch places a
-  workspace-file comment above the terminal row. The UI labels them as "the note the makers left above
-  this line", which is accurate regardless.
-- **In-page anchors are intercepted** in rendered documents so that `#section` links inside a package
-  reference scroll instead of replacing the route hash.
-- The Markdown renderer is `marked` with GFM tables; Shiki syntax highlighting from the Harness theme
-  is not reproduced, so code blocks are token-coloured rather than syntax-coloured.
-- **The plain-language entries are grounded but not authored by DeepSeek.** They are derived from the
-  shipped documentation by the pipeline above. Where the makers documented no limitation, the entry
-  says so rather than guessing.
-- 27 packages that the in-product reference documents are **not** in this desktop build: the
-  `dsh-lsp` language-server family, the `dsh-ssh` family, `dsh-storage-sqlite`, `dsh-tool-terminal`,
-  `dsh-tool-session-query`, `dsh-llm-replay`, `dsh-session-title-all-prompts-llm`, the Exa and
+```bash
+node tools/smoke.mjs                                 # dataset + markdown pipeline, no browser needed
+node tools/serve-dist.mjs                            # serve dist/ on :4173
+node tools/verify-dist.mjs http://127.0.0.1:4173     # HTTP checks against the built site
+node tools/check-plain.cjs                           # plain-language coverage + jargon audit
+```
+
+`smoke.mjs` asserts the dataset invariants (287 packages, 183 settings lines, 4 presets expanding to
+29/30/6/30), that all 285 documents render through the deployed markdown pipeline, that install states
+account for every package exactly once, and that no engineer jargon reaches reader-facing text.
+`verify-dist.mjs` asserts a built site serves its shell, stylesheet, main bundle and lazily-loaded
+documentation.
+
+## Limitations, stated plainly
+
+- **The plain-language entries are generated from the shipped documentation — they are not written by
+  DeepSeek.** They are grounded under the rule above, and each page shows the original reference so you
+  can always check them.
+- **Documentation is rendered as trusted first-party HTML** and is not sanitized, because it is not
+  third-party input. Point this pipeline at untrusted packages and you would need a sanitizer first.
+- **Quoted rationale is verbatim**, including one place where the shipped patch places a comment about
+  the workspace file service above the terminal row. The UI labels those notes as "the note the makers
+  left above this line", which stays accurate regardless.
+- **Code blocks are token-coloured, not syntax-highlighted.** The Harness Shiki theme is not reproduced.
+- **27 packages the in-product reference documents are absent from this build** — the `dsh-lsp`
+  language-server family, the `dsh-ssh` family, `dsh-storage-sqlite`, `dsh-tool-terminal`, the Exa and
   Perplexity search providers, the ACP / Codex / Claude-Code / SDK subagent backends, and the
-  experimental browser-use, computer-use, inspector and Python-PTC packages.
+  experimental browser-use and computer-use packages.
+
+## How the data is built
+
+The generators read an extraction of the installed DeepSeek Harness, so they expect that extraction's
+outputs as sibling directories (`dsh-plugins/`, `extracted/`) which are **not** part of this repository.
+The published site is fully self-contained for building and running; regenerating the dataset needs the
+extraction step.
+
+```bash
+node tools/build-data.cjs       # dataset from the extracted payload
+node tools/build-digests.cjs    # per-package digests + batches for the writers
+#   … writer batches produce .work/plain/<batch>.json …
+node tools/merge-plain.cjs      # validate and attach the plain-language layer
+```
+
+## Licensing
+
+No licence has been chosen for this repository yet, which means it is currently "all rights reserved"
+by default. The DeepSeek Harness itself is MIT licensed, and the documentation quoted here comes from
+that package.
